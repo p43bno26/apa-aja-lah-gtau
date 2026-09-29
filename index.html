@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Leitfaden &amp; SOP Programmer — Buku Panduan</title>
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  * { box-sizing:border-box; margin:0; padding:0; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body { font-family:'Segoe UI',Arial,Helvetica,sans-serif; background:#4a4a4a; color:#1c2b3a; }
+
+  .page { width:210mm; height:297mm; background:#fff; margin:10px auto; padding:15mm 17mm 12mm;
+          position:relative; overflow:hidden; box-shadow:0 5px 20px rgba(0,0,0,.45);
+          display:flex; flex-direction:column; }
+  @media print { body{background:#fff} .page{margin:0; box-shadow:none; page-break-after:always;} }
+
+  /* header & footer */
+  .ph { display:flex; justify-content:space-between; font-size:8pt; color:#6b7d92; letter-spacing:.5px;
+        border-bottom:1.2px solid #d7e3ef; padding-bottom:2mm; margin-bottom:5mm; text-transform:uppercase; }
+  .pf { margin-top:auto; text-align:center; font-size:9pt; color:#6b7d92; padding-top:2.5mm; }
+
+  /* tipografi */
+  h1 { font-size:22pt; color:#0d2240; }
+  h2.sec { font-size:13.5pt; color:#0d2240; margin:4mm 0 2.5mm; padding-left:3mm; border-left:2.5mm solid #2f9bff; }
+  h3.sec { font-size:11pt; color:#1e88e5; margin:3.5mm 0 2mm; text-transform:uppercase; letter-spacing:.5px; }
+  p { font-size:10.3pt; line-height:1.55; text-align:justify; margin-bottom:2.5mm; }
+  ul.b, ol.b { margin:0 0 3mm 6mm; }
+  ul.b li, ol.b li { font-size:10.3pt; line-height:1.5; margin-bottom:1.4mm; }
+  b.ac { color:#1e88e5; }
+
+  /* kotak info */
+  .box { background:#eef5fc; border-left:2.5mm solid #1e88e5; padding:3mm 4mm; border-radius:1.5mm; margin:3mm 0; font-size:10pt; line-height:1.5; }
+  .box.tip { background:#e9f8ef; border-color:#1e9e5a; }
+  .box.warn { background:#fdf3e7; border-color:#f0a04b; }
+  .box b.t { display:block; margin-bottom:1mm; color:#0d2240; text-transform:uppercase; font-size:9pt; letter-spacing:.5px; }
+
+  /* SOP banner & langkah */
+  .sophead { background:linear-gradient(90deg,#0d2240,#1c4e89); color:#fff; padding:3mm 4.5mm; border-radius:2mm;
+             font-size:11.5pt; font-weight:700; letter-spacing:.5px; margin:3mm 0 3mm; }
+  .sophead small { display:block; font-weight:400; font-size:8.5pt; color:#9fc3e8; letter-spacing:1px; }
+  .steps { list-style:none; margin:0 0 3mm; counter-reset:s; }
+  .steps li { counter-increment:s; position:relative; padding-left:11mm; margin-bottom:2.2mm; font-size:10.2pt; line-height:1.45; }
+  .steps li::before { content:counter(s,decimal-leading-zero); position:absolute; left:0; top:0; width:8mm; height:8mm;
+                      background:#0d2240; color:#fff; border-radius:1.5mm; text-align:center; line-height:8mm; font-size:9pt; font-weight:700; }
+
+  /* tabel */
+  table { width:100%; border-collapse:collapse; font-size:9.4pt; margin:2.5mm 0 3mm; }
+  th { background:#0d2240; color:#fff; padding:2mm 2.5mm; text-align:left; font-size:9pt; letter-spacing:.3px; }
+  td { border:1px solid #c9d8e8; padding:1.8mm 2.5mm; vertical-align:top; line-height:1.4; }
+  tr:nth-child(even) td { background:#f2f7fc; }
+
+  /* kode */
+  pre { background:#0d1b2e; color:#d8e6f5; padding:3.5mm 4mm; border-radius:2mm; font-family:Consolas,'Courier New',monospace;
+        font-size:8.8pt; line-height:1.55; white-space:pre-wrap; margin:2.5mm 0 3mm; }
+  .k{color:#ff7b9c;} .s{color:#7ee787;} .c{color:#7d93b2;font-style:italic;} .f{color:#79c0ff;} .n{color:#ffb86c;}
+  .cap { font-size:8.5pt; color:#5b7089; text-align:center; font-style:italic; margin:1mm 0 3mm; }
+
+  /* pembuka bab */
+  .opener { background:linear-gradient(135deg,#081627 0%,#123157 70%,#1c4e89 100%); color:#fff;
+            margin:-15mm -17mm -12mm; padding:26mm 20mm 20mm; flex:1; display:flex; flex-direction:column; }
+  .opener .lbl { font-size:10pt; letter-spacing:4px; color:#2f9bff; text-transform:uppercase; margin-bottom:4mm; }
+  .opener .num { font-size:64pt; font-weight:800; color:transparent; -webkit-text-stroke:1.5px #2f9bff; line-height:1; }
+  .opener h1 { color:#fff; font-size:26pt; margin:6mm 0 3mm; line-height:1.2; }
+  .opener .sub { color:#9fc3e8; font-size:11.5pt; line-height:1.6; max-width:130mm; }
+  .opener ul { margin-top:8mm; list-style:none; }
+  .opener ul li { font-size:10.5pt; color:#cfe2f5; padding:2.2mm 0; border-bottom:1px solid rgba(255,255,255,.12); }
+  .opener ul li b { color:#2f9bff; margin-right:3mm; }
+  .opener .foot { margin-top:auto; color:#5f7ea6; font-size:9pt; letter-spacing:2px; }
+
+  .cover { padding:0; background:linear-gradient(135deg,#0a1a33,#123157); }
+  .cover img { width:100%; height:100%; object-fit:cover; display:block; }
+
+  .title-page { justify-content:center; align-items:center; text-align:center; }
+  .title-page .code { font-family:Consolas,monospace; color:#2f9bff; font-size:30pt; margin-bottom:6mm; }
+  .title-page h1 { font-size:30pt; letter-spacing:1px; line-height:1.15; }
+  .title-page h1 span { color:#2f9bff; display:block; font-size:40pt; }
+  .title-page .sub { margin-top:6mm; font-size:12pt; color:#3d5a7a; max-width:130mm; line-height:1.6; }
+  .title-page .tag { margin-top:14mm; color:#1e88e5; font-style:italic; font-size:11.5pt; line-height:1.7; }
+  .title-page .ed { margin-top:12mm; color:#6b7d92; font-size:9.5pt; letter-spacing:2px; }
+
+  /* tim penyusun di halaman judul */
+  .title-page .authors { margin-top:7mm; }
+  .title-page .authors .lbl { font-size:9pt; letter-spacing:2px; color:#1e88e5;
+    text-transform:uppercase; font-weight:700; margin-bottom:3mm; }
+  .title-page .names { display:flex; flex-wrap:wrap; justify-content:center; gap:2.5mm; }
+  .title-page .names span { background:#eef5fc; border:1px solid #cfe0f2; border-radius:6mm;
+    padding:1.8mm 5mm; font-size:10pt; color:#0d2240; font-weight:600; }
+  .title-page .kel { margin-top:3mm; font-size:10.5pt; color:#3d5a7a; font-weight:700; letter-spacing:.5px; }
+
+  /* kop sekolah & pembimbing */
+  .title-page .school { margin-bottom:8mm; display:flex; align-items:center; gap:5mm; text-align:left; }
+  .title-page .logo-ph { width:21mm; height:21mm; min-width:21mm; border:2px dashed #2f9bff; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:7pt; color:#1e88e5;
+    font-weight:700; text-align:center; line-height:1.3; overflow:hidden; }
+  .title-page .logo-ph img { width:100%; height:100%; object-fit:contain; }
+  .title-page .school .nm { font-size:14pt; font-weight:800; color:#0d2240; letter-spacing:1px; line-height:1.25; }
+  .title-page .school .adr { font-size:9pt; color:#3d5a7a; margin-top:1mm; }
+  .title-page .pembimbing { margin-top:5mm; font-size:10.5pt; color:#3d5a7a; }
+  .title-page .pembimbing b { color:#0d2240; }
+
+  .toc li { display:flex; font-size:10.2pt; padding:1.6mm 0; border-bottom:1px dotted #b9cadd; }
+  .toc li span:last-child { margin-left:auto; font-weight:700; color:#1e88e5; }
+  .toc ul { list-style:none; }
+  .toc .lvl1 { font-weight:700; color:#0d2240; margin-top:2.5mm; }
+  .toc .lvl2 { padding-left:7mm; color:#3d5a7a; font-weight:400; border-bottom:1px dotted #d7e3ef; }
+  .toc .lvl2 span:first-child::before { content:"– "; color:#2f9bff; }
+
+  .chk { list-style:none; margin-bottom:4mm; }
+  .chk li { font-size:10.2pt; padding:1.6mm 0 1.6mm 8mm; position:relative; border-bottom:1px dotted #d7e3ef; }
+  .chk li::before { content:""; position:absolute; left:0; top:2mm; width:4.2mm; height:4.2mm; border:1.4px solid #1e88e5; border-radius:1mm; }
+</style>
+</head>
+<body>
+
+<!-- ============ HAL 1 : SAMPUL DEPAN ============ -->
+<section class="page cover"><img src="sampul-depan.jpg" alt="Sampul Depan"></section>
+
+<!-- ============ HAL 2 : HALAMAN JUDUL ============ -->
+<section class="page title-page">
+  <!-- GANTI: kalau sudah punya file logo, ganti isi div di bawah menjadi:
+       <img src="logo-sekolah.png" alt="Logo">  -->
+  <div class="school">
+    <div class="logo-ph">LOGO<br>SEKOLAH</div>
+    <div>
+      <div class="nm">[NAMA SEKOLAH]</div>          <!-- GANTI -->
+      <div class="adr">[ALAMAT / KOTA SEKOLAH]</div> <!-- GANTI -->
+    </div>
+  </div>
+
+  <div class="code">&lt;/&gt;</div>
+  <h1>LEITFADEN &amp; SOP<span>PROGRAMMER</span></h1>
+  <div class="sub">Buku Panduan &amp; Standar Operasional Prosedur Kerja:<br>
+  Standar, <i>Best Practices</i>, dan Proses Kerja untuk Pengembangan<br>Perangkat Lunak yang Produktif dan Berkualitas</div>
+  <div class="authors">
+    <div class="lbl">Disusun Oleh</div>
+    <div class="names">
+      <span>Abdillah Imni</span>
+      <span>Zainal I'lmi</span>
+      <span>Carrisa Dian</span>
+      <span>Jasika Auliya</span>
+      <span>Syifa</span>
+    </div>
+    <div class="kel">Kelompok 3 &nbsp;•&nbsp; Kelas XI PPLG 1</div>
+  </div>
+  <div class="pembimbing">Pembimbing: <b>[Nama Guru Pembimbing]</b></div> <!-- GANTI -->
+  <div class="tag" style="margin-top:7mm">Proses Jelas. Tim Lebih Kuat.<br>Perangkat Lunak Berkualitas.</div>
+  <div class="ed">EDISI PERTAMA &nbsp;•&nbsp; 2025</div>
+  <div class="pf">2</div>
+</section>
+
+<!-- ============ HAL 3 : INFO PUBLIKASI ============ -->
+<section class="page">
+  <div class="ph"><span>Leitfaden &amp; SOP Programmer</span><span>Informasi Publikasi</span></div>
+  <h2 class="sec">Informasi Publikasi</h2>
+  <table>
+    <tr><td style="width:45mm"><b>Judul</b></td><td>Leitfaden &amp; SOP Programmer — Buku Panduan dan Standar Operasional Prosedur Kerja Programmer</td></tr>
+    <tr><td><b>Edisi</b></td><td>Edisi Pertama, 2025</td></tr>
+    <tr><td><b>ISBN</b></td><td>978-3-16-148410-7</td></tr>
+    <tr><td><b>Deskripsi Fisik</b></td><td>45 halaman; ilustrasi diagram; 21 cm × 29,7 cm (A4)</td></tr>
+    <tr><td><b>Bidang</b></td><td>Teknologi Informasi — Rekayasa Perangkat Lunak</td></tr>
+    <tr><td><b>Sasaran Pembaca</b></td><td>Programmer pemula, mahasiswa informatika, developer profesional, dan tim engineering</td></tr>
+    <tr><td><b>Penyusun</b></td><td>Kelompok 3 — XI PPLG 1: Abdillah Imni, Zainal I'lmi, Carrisa Dian, Jasika Auliya, Syifa</td></tr>
+  </table>
+  <h2 class="sec">Hak Cipta &amp; Penafian (Disclaimer)</h2>
+  <p>Hak cipta dilindungi undang-undang. Dilarang memperbanyak, mendistribusikan, atau menjual sebagian maupun seluruh isi buku ini tanpa izin tertulis dari penerbit.</p>
+  <p>Seluruh contoh kode, nama perangkat lunak, dan merek dagang yang disebutkan dalam buku ini digunakan solely untuk keperluan edukasi dan merupakan milik pemiliknya masing-masing. Contoh kode bersifat ilustratif — sesuaikan dengan kebijakan dan konteks proyek di tempat Anda bekerja.</p>
+  <div class="box tip"><b class="t">Catatan Penerbit</b>
+  Buku ini disusun mengikuti praktik industri yang umum digunakan (clean code, Git Flow, conventional commits, dan testing pyramid) dan dapat dijadikan acuan internal tim.</div>
+  <div class="pf">3</div>
+</section>
+
+<!-- ============ HAL 4 : KATA PENGANTAR ============ -->
+<section class="page">
+  <div class="ph"><span>Leitfaden &amp; SOP Programmer</span><span>Kata Pengantar</span></div>
+  <h2 class="sec">Kata Pengantar</h2>
+  <p>Menjadi programmer bukan hanya soal menulis kode yang <i>berjalan</i>, tetapi menulis kode yang <b class="ac">mudah dibaca, mudah dirawat, dan bermanfaat bagi tim</b>. Di dunia nyata, perangkat lunak dibangun oleh banyak orang, dalam waktu lama, dan terus berubah. Tanpa standar dan proses yang jelas, proyek akan cepat berubah menjadi kiamat digital: kode tak terbaca, bug bermunculan, dan tim saling menyalahkan.</p>
+  <p>Buku ini lahir dari kebutuhan nyata di lapangan: sebuah pegangan yang merangkum <b class="ac">standar kerja (leitfaden)</b> dan <b class="ac">prosedur operasional (SOP)</b> seorang programmer — mulai dari cara menamai variabel, alur menerima tugas, aturan <i>commit</i>, hingga proses <i>deployment</i> dan pemeliharaan sistem.</p>
+  <p>Buku ini terdiri atas lima bab. Bab 1 memperkenalkan profesi dan siklus kerja. Bab 2 membahas standar penulisan kode. Bab 3 menyajikan tujuh SOP inti alur kerja pengembangan. Bab 4 mengatur kerja sama tim dengan <i>version control</i>. Bab 5 menuntaskan pengujian, rilis, dan pemeliharaan. Dilengkapi lampiran berupa templat SOP dan <i>checklist</i> siap pakai.</p>
+  <p>Tulislah kode seolah-olah orang yang merawatnya adalah Anda sendiri enam bulan ke depan — karena sering kali, memang begitu. Selamat membaca dan selamat berkarya!</p>
+  <div class="box"><b class="t">Untuk Siapa Buku Ini?</b>
+  ✦ Programmer pemula yang baru memasuki dunia kerja &nbsp;✦ Tim development yang ingin menyamakan standar &nbsp;✦ Lead/mentor yang membutuhkan pegangan onboarding anggota baru.</div>
+  <div style="display:flex; justify-content:space-between; margin-top:10mm; padding:0 8mm">
+    <div style="text-align:center">
+      <p style="margin-bottom:12mm">Disusun oleh,</p>
+      <p><b>Kelompok 3 — XI PPLG 1</b></p>
+      <p style="font-size:9.5pt">Abdillah Imni · Zainal I'lmi<br>Carrisa Dian · Jasika Auliya · Syifa</p>
+    </div>
+    <div style="text-align:center">
+      <p style="margin-bottom:12mm">Disetujui oleh,</p>
+      <p><b>[Nama Guru Pembimbing]</b></p> <!-- GANTI -->
+      <p style="font-size:9.5pt">Guru Pembimbing</p>
+    </div>
+  </div>
+  <div class="pf">4</div>
+</section>
+
+<!-- ============ HAL 5 : DAFTAR ISI 1 ============ -->
+<section class="page">
+  <div class="ph"><span>Leitfaden &amp; SOP Programmer</span><span>Daftar Isi</span></div>
+  <h2 class="sec">Daftar Isi</h2>
+  <ul class="toc">
+    <li><span>Kata Pengantar</span><span>4</span></li>
+    <li><span>Cara Menggunakan Buku Ini</span><span>6</span></li>
+    <li class="lvl1"><span>BAB 1 — Pengenalan Profesi &amp; Standar Kerja Programmer</span><span>7</span></li>
+    <li class="lvl2"><span>1.1 Pengertian &amp; Jenis Programmer</span><span>8</span></li>
+    <li class="lvl2"><span>1.2 Tugas, Tanggung Jawab &amp; Agenda Harian</span><span>9</span></li>
+    <li class="lvl2"><span>1.3 Etika Profesi &amp; Disiplin Kerja</span><span>10</span></li>
+    <li class="lvl2"><span>1.4 Siklus Hidup Pengembangan Perangkat Lunak (SDLC)</span><span>11</span></li>
+    <li class="lvl2"><span>1.5 Kompetensi Wajib &amp; Rangkuman Bab 1</span><span>12</span></li>
+    <li class="lvl1"><span>BAB 2 — Standar Penulisan Kode (Coding Standards)</span><span>13</span></li>
+    <li class="lvl2"><span>2.1 Mengapa Standar Kode Itu Penting</span><span>14</span></li>
+    <li class="lvl2"><span>2.2 Aturan Penamaan (Naming Convention)</span><span>15</span></li>
+    <li class="lvl2"><span>2.3 Format &amp; Gaya Penulisan Kode</span><span>16</span></li>
+    <li class="lvl2"><span>2.4 Komentar &amp; Dokumentasi Kode</span><span>17</span></li>
+    <li class="lvl2"><span>2.5 Studi Kasus: Kode Buruk vs Kode Baik</span><span>18</span></li>
+    <li class="lvl2"><span>2.6 Prinsip DRY, KISS, YAGNI &amp; Struktur Folder</span><span>19</span></li>
+    <li class="lvl1"><span>BAB 3 — SOP Alur Kerja Pengembangan</span><span>20</span></li>
+    <li class="lvl2"><span>3.1 Peta SOP Pengembangan</span><span>21</span></li>
+    <li class="lvl2"><span>SOP-01 : Penerimaan Tugas Baru</span><span>22</span></li>
+    <li class="lvl2"><span>SOP-02 : Analisis Kebutuhan</span><span>23</span></li>
+    <li class="lvl2"><span>SOP-03 : Desain &amp; Perencanaan</span><span>24</span></li>
+    <li class="lvl2"><span>SOP-04 : Proses Coding</span><span>25</span></li>
+    <li class="lvl2"><span>SOP-05 : Code Review</span><span>26</span></li>
+    <li class="lvl2"><span>SOP-06 : Penanganan Bug</span><span>27</span></li>
+    <li class="lvl2"><span>SOP-07 : Dokumentasi &amp; Rangkuman Bab 3</span><span>28</span></li>
+    <div class="pf">5</div>
+  </ul>
+</section>
+
+<!-- ============ HAL 6 : DAFTAR ISI 2 + CARA PAKAI ============ -->
+<section class="page">
+  <div class="ph"><span>Leitfaden &amp; SOP Programmer</span><span>Daftar Isi</span></div>
+  <h2 class="sec">Daftar Isi (Lanjutan)</h2>
+  <ul class="toc">
+    <li class="lvl1"><span>BAB 4 — Version Control &amp; Kolaborasi Tim</span><span>29</span></li>
+    <li class="lvl2"><span>4.1 Konsep Dasar Git</span><span>30</span></li>
+    <li class="lvl2"><span>4.2 Strategi Branching (Alur Cabang)</span><span>31</span></li>
+    <li class="lvl2"><span>4.3 Aturan Commit Message</span><span>32</span></li>
+    <li class="lvl2"><span>4.4 SOP Pull Request &amp; Code Review</span><span>33</span></li>
+    <li class="lvl2"><span>4.5 Menangani Konflik &amp; Komunikasi Tim</span><span>34</span></li>
+    <li class="lvl1"><span>BAB 5 — Testing, Deployment &amp; Pemeliharaan</span><span>35</span></li>
+    <li class="lvl2"><span>5.1 Jenis-Jenis Pengujian &amp; Piramida Testing</span><span>36</span></li>
+    <li class="lvl2"><span>5.2 SOP Unit Testing</span><span>37</span></li>
+    <li class="lvl2"><span>5.3 SOP Debugging</span><span>38</span></li>
+    <li class="lvl2"><span>5.4 SOP Deployment</span><span>39</span></li>
+    <li class="lvl2"><span>5.5 Monitoring, Backup &amp; Rangkuman Bab 5</span><span>40</span></li>
+    <li class="lvl1"><span>Penutup</span><span>41</span></li>
+    <li class="lvl1"><span>Lampiran A — Templat Dokumen SOP (Siap Pakai)</span><span>42</span></li>
+    <li class="lvl1"><span>Lampiran B — Checklist Harian, Mingguan &amp; Pra-Rilis</span><span>43</span></li>
+    <li class="lvl1"><span>Lampiran C — Glosarium Istilah</span><span>44</span></li>
+  </ul>
+  <h2 class="sec">Cara Menggunakan Buku Ini</h2>
+  <p>Buku ini dirancang sebagai <b class="ac">buku kerja (handbook)</b>, bukan sekadar bacaan. Bacalah Bab 1–2 untuk membangun fondasi, kemudian gunakan Bab 3–5 sebagai rujukan harian saat bekerja. Tanda-tanda berikut membantu Anda:</p>
+  <div class="box"><b class="t">■ Kotak Biru — Informasi</b> Penjelasan konsep atau definisi penting yang perlu dipahami.</div>
+  <div class="box tip"><b class="t">■ Kotak Hijau — Tips Praktis</b> Kebiasaan kecil yang berdampak besar pada produktivitas.</div>
+  <div class="box warn"><b class="t">■ Kotak Oranye — Peringatan</b> Kesalahan umum yang harus dihindari.</div>
+  <div class="sophead"><small>FORMAT KHUSUS</small>Langkah bernomor = SOP wajib diikuti secara berurutan</div>
+  <div class="pf">6</div>
+</section>
+
+<!-- ============ HAL 7 : PEMBUKA BAB 1 ============ -->
+<section class="page">
+  <div class="opener">
+    <div class="lbl">Bab Satu</div>
+    <div class="num">01</div>
+    <h1>Pengenalan Profesi &amp; Standar Kerja Programmer</h1>
+    <div class="sub">Memahami siapa programmer itu, apa tanggung jawabnya, etika yang memandunya, dan siklus kerja yang dilaluinya setiap hari.</div>
+    <ul>
+      <li><b>1.1</b> Pengertian &amp; Jenis Programmer</li>
+      <li><b>1.2</b> Tugas, Tanggung Jawab &amp; Agenda Harian</li>
+      <li><b>1.3</b> Etika Profesi &amp; Disiplin Kerja</li>
+      <li><b>1.4</b> Siklus Hidup Pengembangan Perangkat Lunak (SDLC)</li>
+      <li><b>1.5</b> Kompetensi Wajib &amp; Rangkuman</li>
+    </ul>
+    <div class="foot">LEITFADEN &amp; SOP PROGRAMMER — BAGIAN 1 DARI 5</div>
+  </div>
+</section>
+
+<!-- ============ HAL 8 : 1.1 ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 1 — Pengenalan Profesi</span><span>1.1 Pengertian &amp; Jenis Programmer</span></div>
+  <h2 class="sec">1.1 Pengertian &amp; Jenis Programmer</h2>
+  <p><b class="ac">Programmer (software developer/engineer)</b> adalah profesional yang merancang, menulis, menguji, dan memelihara kode program komputer untuk membangun perangkat lunak — website, aplikasi mobile, sistem backend, hingga kecerdasan buatan. Programmer menerjemahkan kebutuhan manusia menjadi instruksi yang dapat dijalankan mesin.</p>
+  <h3 class="sec">Spesialisasi Utama di Industri</h3>
+  <table>
+    <tr><th style="width:38mm">Jenis</th><th>Fokus Kerja</th><th style="width:42mm">Contoh Teknologi</th></tr>
+    <tr><td><b>Front-End</b></td><td>Tampilan &amp; interaksi yang dilihat pengguna (UI/UX)</td><td>HTML, CSS, JavaScript, React, Vue</td></tr>
+    <tr><td><b>Back-End</b></td><td>Logika server, database, API, keamanan</td><td>Node.js, PHP/Laravel, Python, Java, Go</td></tr>
+    <tr><td><b>Full-Stack</b></td><td>Kombinasi front-end dan back-end</td><td>Laravel+Vue, Next.js, Django</td></tr>
+    <tr><td><b>Mobile</b></td><td>Aplikasi Android &amp; iOS</td><td>Kotlin, Swift, Flutter, React Native</td></tr>
+    <tr><td><b>DevOps</b></td><td>Infrastruktur, otomatisasi rilis, monitoring</td><td>Docker, Kubernetes, CI/CD</td></tr>
+    <tr><td><b>QA Engineer</b></td><td>Pengujian kualitas perangkat lunak</td><td>Selenium, Cypress, Postman</td></tr>
+  </table>
+  <p>Berapa pun spesialisasinya, <b class="ac">seluruh programmer di satu tim wajib mengikuti standar dan SOP yang sama</b> agar hasil pekerjaan seragam dan mudah diserahkan antarorang. Inilah alasan buku ini disusun.</p>
+  <div class="box"><b class="t">Fakta Penting</b>
+  Rata-rata programmer membaca kode <i>lebih banyak</i> daripada menulis. Kode yang baik adalah kode yang mudah dibaca oleh manusia — bukan hanya oleh komputer.</div>
+  <div class="pf">8</div>
+</section>
+
+<!-- ============ HAL 9 : 1.2 ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 1 — Pengenalan Profesi</span><span>1.2 Tugas, Tanggung Jawab &amp; Agenda Harian</span></div>
+  <h2 class="sec">1.2 Tugas &amp; Tanggung Jawab Programmer</h2>
+  <ul class="b">
+    <li><b class="ac">Membangun fitur</b> sesuai spesifikasi, tenggat, dan standar kualitas perusahaan.</li>
+    <li><b class="ac">Menulis kode rapi</b> yang memenuhi standar penulisan (Bab 2) dan tervalidasi.</li>
+    <li><b class="ac">Menguji pekerjaan sendiri</b> sebelum diserahkan kepada reviewer atau QA.</li>
+    <li><b class="ac">Ikut serta code review</b> — baik sebagai penulis maupun pemeriksa.</li>
+    <li><b class="ac">Memelihara &amp; memperbaiki bug</b> pada sistem yang sudah berjalan (produksi).</li>
+    <li><b class="ac">Mendokumentasikan</b> setiap fitur, keputusan teknis, dan perubahan penting.</li>
+    <li><b class="ac">Berkomunikasi proaktif</b> — melapor bila terhambat, jangan menunggu ditanya.</li>
+  </ul>
+  <h3 class="sec">Contoh Agenda Harian Programmer (Referensi)</h3>
+  <table>
+    <tr><th style="width:28mm">Waktu</th><th>Kegiatan</th></tr>
+    <tr><td>08.30 – 09.00</td><td><i>Daily stand-up</i>: laporan kemarin, rencana hari ini, hambatan</td></tr>
+    <tr><td>09.00 – 11.30</td><td><i>Deep work</i>: coding fitur utama (mode fokus, minim rapat)</td></tr>
+    <tr><td>11.30 – 12.00</td><td>Menjawab review PR rekan / memperbarui tugas di board</td></tr>
+    <tr><td>13.00 – 15.00</td><td>Lanjut coding, menulis unit test, self-review</td></tr>
+    <tr><td>15.00 – 16.00</td><td>Push branch, membuat Pull Request, diskusi teknis</td></tr>
+    <tr><td>16.00 – 17.00</td><td>Update dokumentasi, catat progres, rapikan <i>TODO</i> besok</td></tr>
+  </table>
+  <div class="box tip"><b class="t">Tips</b>
+  Lindungi blok waktu <i>deep work</i> Anda. Rapat dan chat bisa menyusul; konteks yang hilang saat fokus terpecah mahal harganya bagi programmer.</div>
+  <div class="pf">9</div>
+</section>
+
+<!-- ============ HAL 10 : 1.3 ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 1 — Pengenalan Profesi</span><span>1.3 Etika Profesi &amp; Disiplin Kerja</span></div>
+  <h2 class="sec">1.3 Etika Profesi &amp; Disiplin Kerja</h2>
+  <p>Kepercayaan adalah modal utama seorang programmer. Anda sering memegang akses ke data pengguna, kode rahasia, dan sistem produksi. Karena itu etika bukan pelengkap — melainkan syarat kerja.</p>
+  <h3 class="sec">Lima Prinsip Etika Wajib</h3>
+  <ol class="b">
+    <li><b class="ac">Kerahasiaan (Confidentiality).</b> Kode, data pelanggan, dan rahasia dagang tidak boleh dibagikan ke pihak luar, termasuk ke media sosial atau repositori publik.</li>
+    <li><b class="ac">Kejujuran.</b> Laporkan progres apa adanya. Lebih baik berkata "saya belum selesai, saya terhambat di X" daripada berpura-pura selesai.</li>
+    <li><b class="ac">Hormat atas Kekayaan Intelektual.</b> Gunakan pustaka pihak ketiga sesuai lisensinya; jangan menyalin kode tanpa izin.</li>
+    <li><b class="ac">Keamanan Data.</b> Jangan pernah menulis data sensitif (password, API key) langsung di dalam kode; gunakan <i>environment variable</i>.</li>
+    <li><b class="ac">Tanggung Jawab atas Dampak.</b> Pahami konsekuensi perubahan yang Anda rilis terhadap pengguna dan bisnis.</li>
+  </ol>
+  <h3 class="sec">Disiplin Kerja Sehari-hari</h3>
+  <ul class="b">
+    <li>Hadir dan siap di <i>stand-up</i>; keterlambatan harus diberi tahu.</li>
+    <li>Selesaikan satu tugas sebelum membuka tugas lain (<i>finish what you start</i>).</li>
+    <li>Commit kecil dan sering — jangan menumpuk pekerjaan berhari-hari.</li>
+    <li>Perbarui status tugas di papan kerja (Jira/Trello/Notion) secara real-time.</li>
+    <li>Jangan pernah mengerjakan sistem produksi langsung tanpa izin dan tanpa jalur review.</li>
+  </ul>
+  <div class="box warn"><b class="t">Peringatan</b>
+  Mengubah kode di server produksi secara diam-diam (tanpa branch, tanpa review, tanpa log) adalah pelanggaran serius dan menjadi penyebab utama insiden besar.</div>
+  <div class="pf">10</div>
+</section>
+
+<!-- ============ HAL 11 : 1.4 SDLC + DIAGRAM ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 1 — Pengenalan Profesi</span><span>1.4 Siklus Hidup Pengembangan (SDLC)</span></div>
+  <h2 class="sec">1.4 Siklus Hidup Pengembangan Perangkat Lunak (SDLC)</h2>
+  <p>Setiap pekerjaan programmer berada di dalam satu putaran yang sama, disebut <b class="ac">SDLC (Software Development Life Cycle)</b>. Memahami posisi Anda dalam siklus ini membuat pekerjaan terarah dan terukur.</p>
+  <figure>
+    <svg viewBox="0 0 700 350" style="width:100%">
+      <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#2f9bff"/></marker></defs>
+      <g font-family="Segoe UI,Arial" >
+        <line x1="212" y1="71" x2="250" y2="71" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#ar)"/>
+        <line x1="447" y1="71" x2="485" y2="71" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#ar)"/>
+        <line x1="585" y1="104" x2="585" y2="245" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#ar)"/>
+        <line x1="486" y1="281" x2="450" y2="281" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#ar)"/>
+        <line x1="251" y1="281" x2="215" y2="281" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#ar)"/>
+        <line x1="115" y1="246" x2="115" y2="106" stroke="#2f9bff" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#ar)"/>
+        <text x="130" y="182" font-size="10" fill="#5b7089" font-style="italic">umpan balik &amp; perbaikan</text>
+        <g>
+          <rect x="20" y="40" width="190" height="62" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/>
+          <text x="115" y="67" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">1. PERENCANAAN</text>
+          <text x="115" y="86" text-anchor="middle" fill="#9fc3e8" font-size="9.5">tentukan tujuan &amp; ruang lingkup</text>
+          <circle cx="44" cy="40" r="13" fill="#2f9bff"/><text x="44" y="44" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">1</text>
+        </g>
+        <g>
+          <rect x="255" y="40" width="190" height="62" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/>
+          <text x="350" y="67" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">2. ANALISIS</text>
+          <text x="350" y="86" text-anchor="middle" fill="#9fc3e8" font-size="9.5">kumpulkan kebutuhan detail</text>
+          <circle cx="279" cy="40" r="13" fill="#2f9bff"/><text x="279" y="44" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">2</text>
+        </g>
+        <g>
+          <rect x="490" y="40" width="190" height="62" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/>
+          <text x="585" y="67" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">3. DESAIN</text>
+          <text x="585" y="86" text-anchor="middle" fill="#9fc3e8" font-size="9.5">arsitektur, skema data, UI</text>
+          <circle cx="514" cy="40" r="13" fill="#2f9bff"/><text x="514" y="44" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">3</text>
+        </g>
+        <g>
+          <rect x="490" y="250" width="190" height="62" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/>
+          <text x="585" y="277" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">4. CODING</text>
+          <text x="585" y="296" text-anchor="middle" fill="#9fc3e8" font-size="9.5">tulis kode &amp; unit test</text>
+          <circle cx="514" cy="250" r="13" fill="#2f9bff"/><text x="514" y="254" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">4</text>
+        </g>
+        <g>
+          <rect x="255" y="250" width="190" height="62" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/>
+          <text x="350" y="277" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">5. PENGUJIAN</text>
+          <text x="350" y="296" text-anchor="middle" fill="#9fc3e8" font-size="9.5">verifikasi &amp; validasi hasil</text>
+          <circle cx="279" cy="250" r="13" fill="#2f9bff"/><text x="279" y="254" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">5</text>
+        </g>
+        <g>
+          <rect x="20" y="250" width="190" height="62" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/>
+          <text x="115" y="277" text-anchor="middle" fill="#fff" font-size="12.5" font-weight="bold">6. RILIS &amp; MAINTAIN</text>
+          <text x="115" y="296" text-anchor="middle" fill="#9fc3e8" font-size="9.5">deploy, pantau, rawat</text>
+          <circle cx="44" cy="250" r="13" fill="#2f9bff"/><text x="44" y="254" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">6</text>
+        </g>
+      </g>
+    </svg>
+    <div class="cap">Gambar 1.1 — Siklus SDLC: enam fase yang berputar terus-menerus</div>
+  </figure>
+  <p>Setelah perangkat lunak dirilis (fase 6), kebutuhan baru akan muncul dan siklus kembali ke fase 1. Programmer profesional tidak berhenti di "selesai koding" — ia bertanggung jawab sampai sistem stabil di tangan pengguna.</p>
+  <div class="pf">11</div>
+</section>
+
+<!-- ============ HAL 12 : 1.5 KOMPETENSI + RANGKUMAN ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 1 — Pengenalan Profesi</span><span>1.5 Kompetensi Wajib &amp; Rangkuman</span></div>
+  <h2 class="sec">1.5 Kompetensi yang Harus Dimiliki</h2>
+  <table>
+    <tr><th style="width:55mm">Kompetensi Teknis (Hard Skills)</th><th>Kompetensi Non-Teknis (Soft Skills)</th></tr>
+    <tr><td>Penguasaan minimal 1 bahasa pemrograman secara mendalam</td><td>Komunikasi lisan &amp; tulisan yang jelas</td></tr>
+    <tr><td>Struktur data &amp; algoritma dasar</td><td>Kerja sama tim &amp; empati terhadap rekan</td></tr>
+    <tr><td>Version control (Git) &amp; alur kolaborasi</td><td>Manajemen waktu &amp; estimasi realistis</td></tr>
+    <tr><td>Database (SQL/NoSQL) &amp; query dasar</td><td>Kemampuan menerima kritik review dengan tenang</td></tr>
+    <tr><td>Pengujian (unit test) &amp; debugging</td><td>Disiplin mengikuti proses/SOP tim</td></tr>
+    <tr><td>Pemahaman dasar jaringan, HTTP &amp; keamanan</td><td>Kemauan belajar teknologi baru terus-menerus</td></tr>
+  </table>
+  <div class="box tip"><b class="t">Tips Berkembang</b>
+  Bangun kebiasaan belajar 30–60 menit per hari: dokumentasi resmi, artikel teknik, atau membaca kode open source. Konsistensi mengalahkan intensitas.</div>
+  <h2 class="sec">Rangkuman Bab 1</h2>
+  <ul class="b">
+    <li>Programmer bertanggung jawab atas <b>seluruh siklus</b>: analisis → kode → uji → rilis → rawat.</li>
+    <li>Etika (kerahasiaan, kejujuran, keamanan data) adalah <b>syarat kerja</b>, bukan pilihan.</li>
+    <li>Kode yang baik adalah kode yang <b>mudah dibaca manusia</b> dan mudah diserahkan ke rekan.</li>
+    <li>Disiplin proses (stand-up, update tugas, commit teratur) menjaga tim tetap sinkron.</li>
+  </ul>
+  <div class="box"><b class="t">Uji Pemahaman</b>
+  1) Sebutkan 3 tanggung jawab inti programmer. &nbsp;2) Mengapa fase analisis tidak boleh dilewati? &nbsp;3) Apa risiko mengedit langsung di server produksi?</div>
+  <div class="pf">12</div>
+</section>
+
+<!-- ============ HAL 13 : PEMBUKA BAB 2 ============ -->
+<section class="page">
+  <div class="opener">
+    <div class="lbl">Bab Dua</div>
+    <div class="num">02</div>
+    <h1>Standar Penulisan Kode (Coding Standards)</h1>
+    <div class="sub">Aturan main agar setiap baris kode yang ditulis tim terbaca seragam, konsisten, dan nyaman dirawat — hari ini dan lima tahun ke depan.</div>
+    <ul>
+      <li><b>2.1</b> Mengapa Standar Kode Itu Penting</li>
+      <li><b>2.2</b> Aturan Penamaan (Naming Convention)</li>
+      <li><b>2.3</b> Format &amp; Gaya Penulisan Kode</li>
+      <li><b>2.4</b> Komentar &amp; Dokumentasi Kode</li>
+      <li><b>2.5</b> Studi Kasus: Kode Buruk vs Kode Baik</li>
+      <li><b>2.6</b> Prinsip DRY, KISS, YAGNI &amp; Struktur Folder</li>
+    </ul>
+    <div class="foot">LEITFADEN &amp; SOP PROGRAMMER — BAGIAN 2 DARI 5</div>
+  </div>
+</section>
+
+<!-- ============ HAL 14 : 2.1 ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 2 — Standar Penulisan Kode</span><span>2.1 Mengapa Standar Kode Penting</span></div>
+  <h2 class="sec">2.1 Mengapa Standar Kode Itu Penting</h2>
+  <p><b class="ac">Standar kode (coding standard)</b> adalah kesepakatan tim tentang cara menulis kode: penamaan, format, struktur, dan gaya. Tujuannya bukan soal selera — melainkan <b class="ac">menghilangkan perdebatan dan mempercepat kolaborasi</b>.</p>
+  <h3 class="sec">Manfaat Nyata bagi Tim</h3>
+  <table>
+    <tr><th style="width:52mm">Manfaat</th><th>Penjelasan</th></tr>
+    <tr><td>Keterbacaan (readability)</td><td>Siapa pun bisa membuka file mana pun dan langsung paham polanya</td></tr>
+    <tr><td>Onboarding cepat</td><td>Anggota baru produktif lebih cepat karena kode terasa familiar</td></tr>
+    <tr><td>Review lebih cepat</td><td>Reviewer fokus pada logika, bukan membetulkan spasi dan nama variabel</td></tr>
+    <tr><td>Lebih sedikit bug</td><td>Kode yang rapi menyembunyikan lebih sedikit kesalahan</td></tr>
+    <tr><td>Mudah dirawat</td><td>Perubahan 6 bulan ke depan tidak menakutkan</td></tr>
+  </table>
+  <h3 class="sec">Prinsip Utama: Kode untuk Manusia</h3>
+  <p>Kompiler tidak peduli nama variabel Anda. Rekan setim Anda — peduli. Karena itu prioritas standar kode adalah: <b class="ac">mudah dibaca → mudah dipahami → mudah diubah</b>.</p>
+  <div class="box"><b class="t">Aturan Tim yang Disarankan</b>
+  Satu tim = satu panduan gaya (style guide). Terapkan secara otomatis dengan alat: <b>ESLint / Prettier</b> (JavaScript), <b>Pint / PHP-CS-Fixer</b> (PHP), <b>Black / Flake8</b> (Python), <b>gofmt</b> (Go). Diskusi gaya berakhir; review menjadi berharga.</div>
+  <div class="box tip"><b class="t">Tips</b>
+  Pasang format otomatis (<i>format on save</i>) di editor Anda. Kode yang rapi seharusnya "gratis" — tidak memakan energi berpikir.</div>
+  <div class="pf">14</div>
+</section>
+
+<!-- ============ HAL 15 : 2.2 PENAMAAN ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 2 — Standar Penulisan Kode</span><span>2.2 Aturan Penamaan</span></div>
+  <h2 class="sec">2.2 Aturan Penamaan (Naming Convention)</h2>
+  <p>Nama adalah dokumentasi termurah dan paling sering dibaca. Ikuti konvensi berikut secara konsisten di seluruh proyek:</p>
+  <table>
+    <tr><th style="width:34mm">Elemen</th><th style="width:38mm">Gaya Penulisan</th><th>Contoh Benar</th></tr>
+    <tr><td>Variabel &amp; parameter</td><td>camelCase — kata benda</td><td><b>totalHarga</b>, <b>daftarPengguna</b></td></tr>
+    <tr><td>Fungsi / metode</td><td>camelCase — diawali kata kerja</td><td><b>hitungDiskon()</b>, <b>ambilDataUser()</b></td></tr>
+    <tr><td>Kelas / komponen</td><td>PascalCase</td><td><b>PenggunaService</b>, <b>TombolUtama</b></td></tr>
+    <tr><td>Konstanta global</td><td>UPPER_SNAKE_CASE</td><td><b>MAX_PERCOBAAN</b>, <b>URL_API</b></td></tr>
+    <tr><td>File / modul</td><td>kebab-case atau PascalCase (konsisten!)</td><td><b>user-profile.js</b>, <b>KartuProduk.tsx</b></td></tr>
+    <tr><td>Tabel &amp; kolom database</td><td>snake_case, bentuk tunggal</td><td><b>tabel_pesanan</b>.<b>tanggal_bayar</b></td></tr>
+    <tr><td>Branch Git</td><td>kebab-case berawalan tipe</td><td><b>feature/login-google</b>, <b>fix/hitung-pajak</b></td></tr>
+  </table>
+  <h3 class="sec">Kaidah Makna (Lebih Penting dari Gaya)</h3>
+  <ul class="b">
+    <li>Nama harus <b class="ac">menjawab "apa isinya"</b> tanpa perlu membuka isinya. <code>usiaPengguna</code> ✔ &nbsp; <code>u</code> / <code>data2</code> ✘</li>
+    <li>Hindari angka ajaib dan singkatan samar: <code>x1</code>, <code>tmp</code>, <code>flag</code> ✘</li>
+    <li>Boolean diawali kata sifat: <code>isActive</code>, <code>sudahDibayar</code>, <code>bolehEdit</code>.</li>
+    <li>Fungsi yang mengembalikan nilai diawali <code>get/hitung</code>; yang mengubah data diawali <code>set/simpan/update</code>.</li>
+  </ul>
+  <div class="box warn"><b class="t">Peringatan</b>
+  Mengganti nama yang salah setelah kode menyebar jauh lebih mahal daripada memikirkan nama yang tepat selama 30 detik di awal.</div>
+  <div class="pf">15</div>
+</section>
+
+<!-- ============ HAL 16 : 2.3 FORMAT ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 2 — Standar Penulisan Kode</span><span>2.3 Format &amp; Gaya Penulisan Kode</span></div>
+  <h2 class="sec">2.3 Format &amp; Gaya Penulisan Kode</h2>
+  <h3 class="sec">Aturan Format Standar Tim</h3>
+  <table>
+    <tr><th style="width:48mm">Aspek</th><th>Aturan</th></tr>
+    <tr><td>Indentasi</td><td>2 atau 4 spasi (pilih satu untuk seluruh tim) — <b>larang tab campur spasi</b></td></tr>
+    <tr><td>Panjang baris</td><td>Maksimal 100–120 karakter agar mudah dibaca berdampingan</td></tr>
+    <tr><td>Satu tugas per fungsi</td><td>Fungsi idealnya &lt; 20 baris; bila lebih, pecah menjadi fungsi kecil</td></tr>
+    <tr><td>Kurung kurawal <code>{ }</code></td><td>Selalu digunakan meski isi hanya satu baris; buka di baris yang sama</td></tr>
+    <tr><td>Spasi</td><td>Spasi setelah koma dan di sekitar operator: <code>total = harga * jumlah</code></td></tr>
+    <tr><td>Urutan kode dalam file</td><td>import → konstanta → fungsi utama → fungsi bantu → ekspor</td></tr>
+    <tr><td>Baris kosong</td><td>1 baris kosong memisahkan blok logika; jangan menumpuk 3+ baris kosong</td></tr>
+  </table>
+  <h3 class="sec">Contoh Penerapan</h3>
+<pre><span class="c">// ✔ BENAR — rapi, konsisten, mudah dibaca</span>
+<span class="k">function</span> <span class="f">hitungTotalBelanja</span>(hargaSatuan, jumlah) {
+  <span class="k">const</span> subtotal = hargaSatuan * jumlah;
+  <span class="k">if</span> (subtotal &gt; BATAS_DISKON) {
+    <span class="k">return</span> subtotal * (<span class="n">1</span> - RATE_DISKON);
+  }
+  <span class="k">return</span> subtotal;
+}
+
+<span class="c">// ✘ SALAH — tidak konsisten, sulit dibaca</span>
+<span class="k">function</span> <span class="f">hitungTotalBelanja</span>(h,j){
+<span class="k">var</span> s=h*j; <span class="k">if</span>(s&gt;<span class="n">100000</span>){<span class="k">return</span> s*(<span class="n">1</span>-<span class="n">0.1</span>);}
+<span class="k">return</span> s;}
+</pre>
+  <div class="box tip"><b class="t">Tips</b>
+  Gunakan alat pemformat otomatis (Prettier/gofmt) agar format tidak pernah menjadi bahan perdebatan di code review.</div>
+  <div class="pf">16</div>
+</section>
+
+<!-- ============ HAL 17 : 2.4 KOMENTAR ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 2 — Standar Penulisan Kode</span><span>2.4 Komentar &amp; Dokumentasi Kode</span></div>
+  <h2 class="sec">2.4 Komentar &amp; Dokumentasi Kode</h2>
+  <p>Komentar yang baik menjelaskan <b class="ac">mengapa (why)</b>, bukan <b class="ac">apa (what)</b>. Jika kode perlu dikomentari baris demi baris agar paham, biasanya kodenya sendiri perlu dirapikan dulu.</p>
+  <h3 class="sec">Kapan Berkomentar ✔</h3>
+  <ul class="b">
+    <li>Menjelaskan <b>alasan keputusan teknis</b> yang tidak terlihat dari kode.</li>
+    <li>Memberi peringatan: <i>jangan ubah urutan ini</i>, <i>workaround bug pustaka X</i>.</li>
+    <li>Menandai tugas lanjutan dengan format seragam: <code>// TODO(nama): ...</code> atau <code>// FIXME: ...</code></li>
+    <li>Mendokumentasikan API publik (JSDoc / docstring): parameter, nilai kembali, contoh.</li>
+  </ul>
+  <h3 class="sec">Kapan Tidak Perlu ✘</h3>
+  <ul class="b">
+    <li>Komentar yang mengulang isi kode: <code>// tambah 1 ke i</code>.</li>
+    <li>Komentar basi — kode sudah berubah, komentarnya menyesatkan.</li>
+    <li>Kode mati (<i>commented-out code</i>) dibiarkan berminggu-minggu — hapus saja, Git mengingatnya.</li>
+  </ul>
+<pre><span class="c">/**
+ * Menghitung ongkir berdasarkan berat dan jarak pengiriman.
+ * @param {number} beratKg  - berat paket dalam kilogram (min. 1)
+ * @param {number} jarakKm  - jarak pengiriman dalam kilometer
+ * @returns {number} ongkir dalam Rupiah
+ */</span>
+<span class="k">function</span> <span class="f">hitungOngkir</span>(beratKg, jarakKm) {
+  <span class="c">// Tarif dasar naik 5% tiap tahun sesuai SK manajemen 2025-03</span>
+  <span class="k">const</span> tarifDasar = <span class="n">5000</span>;
+  <span class="k">return</span> tarifDasar + (beratKg * <span class="n">2000</span>) + (jarakKm * <span class="n">150</span>);
+}</pre>
+  <div class="box"><b class="t">Dokumentasi Tingkat Proyek</b>
+  Setiap proyek wajib punya <b>README.md</b> (cara install, jalankan, deploy) dan <b>CHANGELOG.md</b> (catatan perubahan per versi). Kode tanpa dokumentasi = proyek tanpa pintu masuk.</div>
+  <div class="pf">17</div>
+</section>
+
+<!-- ============ HAL 18 : 2.5 BURUK VS BAIK ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 2 — Standar Penulisan Kode</span><span>2.5 Studi Kasus</span></div>
+  <h2 class="sec">2.5 Studi Kasus: Kode Buruk vs Kode Baik</h2>
+  <p>Contoh nyata yang sering ditemui di review. Keduanya <i>berjalan dengan hasil sama</i> — tetapi biaya perawatannya jauh berbeda.</p>
+<pre><span class="c">/* ✘ SEBELUM — "kode sekali jalan" */</span>
+<span class="k">function</span> <span class="f">p</span>(d, t, m) {
+  <span class="k">var</span> x = d * t;
+  <span class="k">if</span> (x &gt; <span class="n">100000</span> &amp;&amp; m == <span class="n">1</span>) {
+    x = x - x * <span class="n">0.1</span>;
+  } <span class="k">else</span> <span class="k">if</span> (m == <span class="n">2</span>) {
+    x = x + <span class="n">15000</span>;
+  }
+  <span class="k">return</span> x;
+}
+<span class="c">// p(50000, 3, 1) ?? Apa arti 1? Apa arti 100000?</span></pre>
+  <table>
+    <tr><th>Masalah pada kode kiri</th><th>Perbaikan yang diterapkan</th></tr>
+    <tr><td>Nama fungsi &amp; parameter tidak bermakna (<code>p</code>, <code>d</code>, <code>t</code>, <code>m</code>)</td><td>Penamaan deskriptif: <code>hitungTagihan(hargaSatuan, jumlah, metode)</code></td></tr>
+    <tr><td><i>Magic number</i>: 100000, 0.1, 15000, 1, 2</td><td>Konstanta bernama: <code>BATAS_DISKON</code>, <code>RATE_DISKON</code></td></tr>
+    <tr><td>Kondisi samar <code>m == 1 / 2</code></td><td>Enum/konstanta: <code>METODE.DISKON</code>, <code>METODE.TAMBAH_PACKING</code></td></tr>
+    <tr><td>Tidak ada komentar alasan &amp; tidak teruji</td><td>JSDoc + unit test untuk tiap aturan bisnis</td></tr>
+  </table>
+<pre><span class="c">/* ✔ SESUDAH — kode yang ramah tim */</span>
+<span class="k">const</span> BATAS_DISKON   = <span class="n">100_000</span>;
+<span class="k">const</span> RATE_DISKON    = <span class="n">0.1</span>;
+<span class="k">const</span> BIAYA_PACKING  = <span class="n">15_000</span>;
+
+<span class="k">function</span> <span class="f">hitungTagihan</span>(hargaSatuan, jumlah, metode) {
+  <span class="k">let</span> total = hargaSatuan * jumlah;
+  <span class="k">if</span> (metode === METODE.DISKON &amp;&amp; total &gt; BATAS_DISKON) {
+    total -= total * RATE_DISKON;
+  } <span class="k">else</span> <span class="k">if</span> (metode === METODE.TAMBAH_PACKING) {
+    total += BIAYA_PACKING;
+  }
+  <span class="k">return</span> total;
+}</pre>
+  <div class="box tip"><b class="t">Ukuran Keberhasilan</b>
+  Seorang rekan yang baru membuka file ini <b>tanpa bertanya sama sekali</b> — itulah tanda kode Anda berhasil.</div>
+  <div class="pf">18</div>
+</section>
+
+<!-- ============ HAL 19 : 2.6 + STRUKTUR FOLDER ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 2 — Standar Penulisan Kode</span><span>2.6 Prinsip DRY, KISS, YAGNI</span></div>
+  <h2 class="sec">2.6 Tiga Prinsip Emas &amp; Struktur Folder</h2>
+  <table>
+    <tr><th style="width:22mm">Prinsip</th><th style="width:48mm">Makna</th><th>Praktiknya</th></tr>
+    <tr><td><b>DRY</b></td><td>Don't Repeat Yourself — jangan mengulang</td><td>Logika yang sama di 3 tempat → jadikan satu fungsi/modul bersama</td></tr>
+    <tr><td><b>KISS</b></td><td>Keep It Simple — sesederhana mungkin</td><td>Pilih solusi paling jelas; kode "pintar" yang rumit adalah utang nyeri</td></tr>
+    <tr><td><b>YAGNI</b></td><td>You Aren't Gonna Need It</td><td>Jangan bangun fitur "siapa tahu nanti perlu" — bangun saat benar-benar dibutuhkan</td></tr>
+  </table>
+  <h3 class="sec">Struktur Folder Proyek yang Disarankan</h3>
+<pre>proyek-toko-online/
+├── src/                <span class="c"># kode utama aplikasi</span>
+│   ├── components/     <span class="c"># komponen UI yang dapat dipakai ulang</span>
+│   ├── services/       <span class="c"># logika bisnis &amp; panggilan API</span>
+│   ├── utils/          <span class="c"># fungsi bantu umum</span>
+│   └── config/         <span class="c"># konfigurasi &amp; environment</span>
+├── tests/              <span class="c"># unit &amp; integration test</span>
+├── docs/               <span class="c"># dokumentasi teknis proyek</span>
+├── .env.example        <span class="c"># contoh variabel lingkungan (tanpa nilai asli!)</span>
+├── README.md           <span class="c"># cara install, jalankan &amp; deploy</span>
+└── CHANGELOG.md        <span class="c"># riwayat perubahan per versi</span></pre>
+  <h2 class="sec">Rangkuman Bab 2</h2>
+  <ul class="b">
+    <li>Standar kode = kesepakatan tim: <b>penamaan bermakna, format konsisten, komentar menjelaskan "mengapa"</b>.</li>
+    <li>Otomatiskan gaya dengan linter/formatter agar review fokus pada logika.</li>
+    <li>Terapkan <b>DRY, KISS, YAGNI</b> pada setiap keputusan menulis kode.</li>
+    <li>Struktur folder rapi membuat proyek mudah dinavigasi siapa pun.</li>
+  </ul>
+  <div class="pf">19</div>
+</section>
+
+<!-- ============ HAL 20 : PEMBUKA BAB 3 ============ -->
+<section class="page">
+  <div class="opener">
+    <div class="lbl">Bab Tiga</div>
+    <div class="num">03</div>
+    <h1>SOP Alur Kerja Pengembangan</h1>
+    <div class="sub">Tujuh Standar Operasional Prosedur (SOP) yang mengatur pekerjaan programmer dari tugas masuk hingga dokumentasi tersimpan — agar kualitas tidak bergantung pada suasana hati.</div>
+    <ul>
+      <li><b>SOP-01</b> Penerimaan Tugas Baru</li>
+      <li><b>SOP-02</b> Analisis Kebutuhan</li>
+      <li><b>SOP-03</b> Desain &amp; Perencanaan</li>
+      <li><b>SOP-04</b> Proses Coding</li>
+      <li><b>SOP-05</b> Code Review</li>
+      <li><b>SOP-06</b> Penanganan Bug</li>
+      <li><b>SOP-07</b> Dokumentasi</li>
+    </ul>
+    <div class="foot">LEITFADEN &amp; SOP PROGRAMMER — BAGIAN 3 DARI 5</div>
+  </div>
+</section>
+
+<!-- ============ HAL 21 : 3.1 PETA SOP ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 3 — SOP Alur Kerja Pengembangan</span><span>3.1 Peta SOP</span></div>
+  <h2 class="sec">3.1 Peta SOP Pengembangan</h2>
+  <p><b class="ac">SOP (Standard Operating Procedure)</b> adalah urutan langkah baku yang wajib diikuti untuk suatu jenis pekerjaan, agar hasilnya konsisten berapa pun orang yang menjalankannya. Ketujuh SOP berikut membentuk satu rangkaian:</p>
+  <table>
+    <tr><th style="width:20mm">Kode</th><th style="width:52mm">Nama Proses</th><th>Pemicu (Input)</th><th style="width:38mm">Keluaran (Output)</th></tr>
+    <tr><td><b>SOP-01</b></td><td>Penerimaan Tugas Baru</td><td>Permintaan fitur/perbaikan masuk</td><td>Tiket tugas terdaftar</td></tr>
+    <tr><td><b>SOP-02</b></td><td>Analisis Kebutuhan</td><td>Tiket tugas diambil programmer</td><td>Spesifikasi &amp; kriteria selesai</td></tr>
+    <tr><td><b>SOP-03</b></td><td>Desain &amp; Perencanaan</td><td>Spesifikasi disetujui</td><td>Rancangan teknis + estimasi</td></tr>
+    <tr><td><b>SOP-04</b></td><td>Proses Coding</td><td>Rancangan siap</td><td>Kode + unit test di branch</td></tr>
+    <tr><td><b>SOP-05</b></td><td>Code Review</td><td>Pull Request dibuat</td><td>Kode disetujui (merge)</td></tr>
+    <tr><td><b>SOP-06</b></td><td>Penanganan Bug</td><td>Laporan bug/insiden</td><td>Bug tertutup terverifikasi</td></tr>
+    <tr><td><b>SOP-07</b></td><td>Dokumentasi</td><td>Setiap perubahan signifikan</td><td>Dokumen &amp; changelog terbaru</td></tr>
+  </table>
+  <div class="box"><b class="t">Aturan Emas SOP</b>
+  <b>1)</b> Ikuti langkah berurutan — jangan lompat. &nbsp;<b>2)</b> Jika langkah tidak relevan, catat alasannya di tiket. &nbsp;<b>3)</b> Jika SOP terbuka tidak cocok untuk situasi nyata, usulkan perubahan melalui lead — jangan langgar diam-diam.</div>
+  <p>SOP bukan birokrasi untuk memperlambat; SOP adalah <b class="ac">rem dan sabuk pengaman</b> yang justru membuat tim bisa melaju lebih cepat dengan percaya diri.</p>
+  <div class="box tip"><b class="t">Tips Implementasi</b>
+  Tempel peta SOP ini di ruang kerja / halaman wiki tim. Anggota baru cukup dibimbing sekali, sisanya mengikuti dokumen.</div>
+  <div class="pf">21</div>
+</section>
+
+<!-- ============ HAL 22 : SOP-01 ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 3 — SOP Alur Kerja Pengembangan</span><span>SOP-01 Penerimaan Tugas</span></div>
+  <div class="sophead"><small>STANDAR OPERASIONAL PROSEDUR · BAB 3</small>SOP-01 : Penerimaan Tugas Baru</div>
+  <p><b>Tujuan:</b> memastikan setiap tugas tercatat jelas, terukur, dan dipahami sebelum satu baris kode pun ditulis.</p>
+  <ol class="steps">
+    <li><b>Verifikasi sumber tugas.</b> Semua pekerjaan harus masuk sebagai tiket di papan kerja (Jira/Trello/GitHub Issues). Permintaan lisan/chat dianggap <i>usulan</i>, bukan tugas.</li>
+    <li><b>Periksa kelengkapan tiket.</b> Tiket minimal memuat: judul, latar belakang, hasil yang diharapkan, tenggat, dan prioritas.</li>
+    <li><b>Konfirmasi pemahaman.</b> Ulangi dengan kalimat Anda sendiri kepada pemberi tugas: "Jadi yang dimaksud adalah X, dengan hasil Y, benar?"</li>
+    <li><b>Nilai ukuran pekerjaan.</b> Kecil (≤ 1 hari) / Sedang (≤ 3 hari) / Besar (&gt; 3 hari → wajib dipecah menjadi sub-tugas).</li>
+    <li><b>Ambil tugas resmi.</b> Pindahkan tiket ke kolom "In Progress" dan tulis nama Anda sebagai penanggung jawab. <b>Satu orang satu tugas aktif.</b></li>
+    <li><b>Catat estimasi awal</b> di tiket. Jika realisasi melesih &gt; 20%, segera laporkan — jangan menunggu tenggat.</li>
+  </ol>
+  <h3 class="sec">Contoh Tiket yang Baik</h3>
+  <table>
+    <tr><th style="width:32mm">Bagian</th><th>Isi</th></tr>
+    <tr><td><b>Judul</b></td><td>Tambah fitur unggah bukti transfer pada halaman pembayaran</td></tr>
+    <tr><td><b>Latar Belakang</b></td><td>CS menerima ±30 konfirmasi manual/hari via WhatsApp</td></tr>
+    <tr><td><b>Hasil Diharapkan</b></td><td>Pengguna dapat mengunggah 1 foto (JPG/PNG, maks 2 MB); gambar tersimpan &amp; tampil di dashboard admin</td></tr>
+    <tr><td><b>Prioritas / Tenggat</b></td><td>Tinggi / 5 hari kerja</td></tr>
+  </table>
+  <div class="box warn"><b class="t">Larangan</b>
+  Memulai koding untuk tiket yang kosong keterangan, dan mengerjakan dua tugas aktif sekaligus. Keduanya adalah resep pekerjaan setengah jadi.</div>
+  <div class="pf">22</div>
+</section>
+
+<!-- ============ HAL 23 : SOP-02 ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 3 — SOP Alur Kerja Pengembangan</span><span>SOP-02 Analisis Kebutuhan</span></div>
+  <div class="sophead"><small>STANDAR OPERASIONAL PROSEDUR · BAB 3</small>SOP-02 : Analisis Kebutuhan</div>
+  <p><b>Tujuan:</b> mengubah tiket menjadi spesifikasi teknis yang tak menimbulkan tafsir ganda — sebelum desain dan koding dimulai.</p>
+  <ol class="steps">
+    <li><b>Pelajari konteks.</b> Baca tiket, dokumentasi terkait, dan kode yang akan disentuh. Pahami <i>alasan bisnis</i> di balik permintaan.</li>
+    <li><b>Identifikasi pengguna &amp; alur.</b> Siapa memakai fitur ini? Apa yang ia lakukan sebelum–sesudah fitur ada?</li>
+    <li><b>Rumuskan kriteria selesai (definition of done).</b> Tulis sebagai daftar yang bisa diuji, misal: "unggah file &gt; 2 MB ditolak dengan pesan jelas".</li>
+    <li><b>Daftar kasus tepi (edge cases).</b> Input kosong, data duplikat, jaringan gagal, hak akses berbeda, dsb.</li>
+    <li><b>Identifikasi dampak.</b> Modul apa lain yang tersentuh? Perlu migrasi database? Perubahan API yang memengaruhi tim lain?</li>
+    <li><b>Ajukan pertanyaan sekaligus</b> (kumpulkan lalu tanyakan dalam satu kesempatan) kepada pemilik produk/atk. Simpan jawaban di tiket.</li>
+    <li><b>Kunci spesifikasi</b> dan minta konfirmasi tertulis (komentar tiket/approval) sebelum lanjut ke SOP-03.</li>
+  </ol>
+  <h3 class="sec">Contoh Kriteria Selesai (DoD)</h3>
+  <table>
+    <tr><th style="width:12mm">No.</th><th>Kriteria — dapat diverifikasi ya/tidak</th></tr>
+    <tr><td>1</td><td>File JPG/PNG ≤ 2 MB berhasil diunggah dan muncul di dashboard admin</td></tr>
+    <tr><td>2</td><td>File &gt; 2 MB atau format lain ditolak dengan pesan bahasa Indonesia yang jelas</td></tr>
+    <tr><td>3</td><td>Gagal koneksi saat unggah → pesan kesalahan + data tidak corrupt</td></tr>
+    <tr><td>4</td><td>Unit test fitur lulus; alur lama (tanpa unggahan) tidak rusak</td></tr>
+  </table>
+  <div class="box"><b class="t">Prinsip</b>
+  Satu jam bertanya menghemat satu minggu membangun hal yang salah. Spesifikasi yang belum jelas = lampu merah untuk koding.</div>
+  <div class="pf">23</div>
+</section>
+
+<!-- ============ HAL 24 : SOP-03 ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 3 — SOP Alur Kerja Pengembangan</span><span>SOP-03 Desain &amp; Perencanaan</span></div>
+  <div class="sophead"><small>STANDAR OPERASIONAL PROSEDUR · BAB 3</small>SOP-03 : Desain &amp; Perencanaan</div>
+  <p><b>Tujuan:</b> memetakan <i>bagaimana</i> solusi dibangun sebelum membangunnya — memilih pendekatan termurah yang memenuhi kebutuhan.</p>
+  <ol class="steps">
+    <li><b>Pilih pendekatan.</b> Rancang di level tinggi dulu: modul apa yang dibuat/diubah, data mengalir dari mana ke mana.</li>
+    <li><b>Rancang data.</b> Skema tabel/koleksi baru, kolom tambahan, indeks yang diperlukan, serta rencana migrasi.</li>
+    <li><b>Rancang antarmuka.</b> Untuk API: endpoint, metode HTTP, bentuk request/response. Untuk UI: sketsa layar atau rujukan desain dari tim desain.</li>
+    <li><b>Cek kode yang sudah ada.</b> Carilah fungsi/modul serupa yang bisa dipakai ulang (prinsip DRY). Jangan membangun yang sudah ada.</li>
+    <li><b>Estimasi &amp; pecah pekerjaan.</b> Susun sub-tugas berurutan, masing-masing ≤ 1 hari, dengan urutan yang bisa diuji bertahap.</li>
+    <li><b>Tuliskan rancangan singkat</b> (5–15 baris) di tiket/dokumen teknis untuk tugas besar; minta persetujuan lead bila dampaknya lintas modul.</li>
+  </ol>
+  <h3 class="sec">Contoh Rincian Rencana (Ringkas)</h3>
+  <table>
+    <tr><th style="width:14mm">Urut</th><th style="width:62mm">Sub-tugas</th><th>Estimasi</th></tr>
+    <tr><td>1</td><td>Migrasi: tabel <code>bukti_transfer</code> (id, order_id, path_file, dibuat_pada)</td><td>2 jam</td></tr>
+    <tr><td>2</td><td>Endpoint unggah: validasi tipe &amp; ukuran, simpan ke storage</td><td>4 jam</td></tr>
+    <tr><td>3</td><td>Komponen UI unggah + pratinjau gambar + pesan kesalahan</td><td>6 jam</td></tr>
+    <tr><td>4</td><td>Tampilan di dashboard admin + unit test &amp; dokumentasi</td><td>4 jam</td></tr>
+  </table>
+  <div class="box tip"><b class="t">Tips Estimasi</b>
+  Kalikan firman hati pertama Anda dengan 1,5–2× — waktu itu untuk pengujian, review, revisi, dan hal tak terduga. Estimasi jujur lebih dihargai daripada estimasi optimis yang meleset.</div>
+  <div class="pf">24</div>
+</section>
+
+<!-- ============ HAL 25 : SOP-04 ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 3 — SOP Alur Kerja Pengembangan</span><span>SOP-04 Proses Coding</span></div>
+  <div class="sophead"><small>STANDAR OPERASIONAL PROSEDUR · BAB 3</small>SOP-04 : Proses Coding</div>
+  <p><b>Tujuan:</b> memastikan kode yang dihasilkan memenuhi standar Bab 2 dan siap diperiksa tanpa perombakan.</p>
+  <ol class="steps">
+    <li><b>Sinkronkan repositori.</b> Ambil kode terbaru: <code>git pull origin develop</code>. Jangan mulai dari kondisi basi.</li>
+    <li><b>Buat branch khusus</b> dari develop dengan nama sesuai aturan: <code>feature/nama-fitur</code> atau <code>fix/nama-bug</code> (lihat Bab 4).</li>
+    <li><b>Kerjakan satu tugas per branch.</b> Jangan mencampur beberapa fitur dalam satu branch — review menjadi mustahil ditimbang.</li>
+    <li><b>Tulis kode sesuai standar:</b> penamaan jelas, fungsi kecil, tanpa kode duplikat, tanpa <i>magic number</i>.</li>
+    <li><b>Commit kecil &amp; sering</b> dengan pesan bermakna (aturan di Bab 4). Setiap commit harus dalam kondisi "tidak merusak".</li>
+    <li><b>Uji sendiri sebelum serah:</b> jalankan unit test, coba alur utama + kasus tepi di lokal. Kode yang belum Anda uji = kode yang belum selesai.</li>
+    <li><b>Bersihkan sebelum push:</b> hapus <code>console.log</code>/<code>var_dump</code> sisa debugging, kode terkomentar, dan file tak terpakai; jalankan linter.</li>
+    <li><b>Push branch</b> dan lanjutkan ke SOP-05 (Code Review).</li>
+  </ol>
+  <div class="box"><b class="t">Definisi "Siap Review"</b>
+  ✔ Lulus linter &nbsp;✔ Lulus unit test &nbsp;✔ Alur utama dicoba manual &nbsp;✔ Tidak ada sisa debugging &nbsp;✔ Commit rapi — baru push.</div>
+  <div class="box warn"><b class="t">Larangan</b>
+  Push langsung ke branch <code>main</code>/<code>develop</code>, dan commit dengan pesan "update", "fix", "asdasd". Keduanya merusak jejak sejarah proyek.</div>
+  <div class="pf">25</div>
+</section>
+
+<!-- ============ HAL 26 : SOP-05 + FLOWCHART ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 3 — SOP Alur Kerja Pengembangan</span><span>SOP-05 Code Review</span></div>
+  <div class="sophead"><small>STANDAR OPERASIONAL PROSEDUR · BAB 3</small>SOP-05 : Code Review</div>
+  <ol class="steps">
+    <li>Buat <b>Pull Request (PR)</b> ke branch <code>develop</code>; isi deskripsi: apa, mengapa, cara menguji.</li>
+    <li>Permintaan <b>1–2 reviewer</b>; PR kecil (&lt; 400 baris) lebih cepat dan lebih tajam ditinjau.</li>
+    <li>Reviewer menilai: kebenaran logika, standar kode, keamanan, dampak, dan kelengkapan uji.</li>
+    <li>Komentar review bersifat <b>terhadap kode, bukan orang</b>. Penulis merespons/memperbaiki, lalu reviewer memeriksa ulang.</li>
+    <li>PR <b>disetujui minimal 1 reviewer</b> + semua pemeriksaan otomatis lulus → boleh di-merge.</li>
+  </ol>
+  <figure>
+    <svg viewBox="0 0 700 470" style="width:96%">
+      <defs><marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#2f9bff"/></marker></defs>
+      <g font-family="Segoe UI,Arial">
+        <rect x="230" y="10" width="240" height="50" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/>
+        <text x="350" y="40" text-anchor="middle" fill="#fff" font-size="12.5" font-weight="bold">1. Selesai menulis kode</text>
+        <line x1="350" y1="60" x2="350" y2="86" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#a2)"/>
+        <rect x="230" y="90" width="240" height="50" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/>
+        <text x="350" y="120" text-anchor="middle" fill="#fff" font-size="12.5" font-weight="bold">2. Self-review, lint &amp; uji lokal</text>
+        <line x1="350" y1="140" x2="350" y2="166" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#a2)"/>
+        <rect x="230" y="170" width="240" height="50" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/>
+        <text x="350" y="200" text-anchor="middle" fill="#fff" font-size="12.5" font-weight="bold">3. Push &amp; buat Pull Request</text>
+        <line x1="350" y1="220" x2="350" y2="246" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#a2)"/>
+        <polygon points="350,250 480,312 350,374 220,312" fill="#1c4e89" stroke="#2f9bff" stroke-width="2"/>
+        <text x="350" y="306" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="bold">4. Review:</text>
+        <text x="350" y="324" text-anchor="middle" fill="#d8e9fb" font-size="10.5">sesuai standar?</text>
+        <line x1="350" y1="374" x2="350" y2="398" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#a2)"/>
+        <text x="358" y="392" font-size="10" fill="#1e7e4a" font-weight="bold">Ya</text>
+        <rect x="240" y="402" width="220" height="50" rx="8" fill="#147a4d" stroke="#7ee787" stroke-width="2"/>
+        <text x="350" y="424" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">5. Merge ke develop</text>
+        <text x="350" y="441" text-anchor="middle" fill="#c9f2d9" font-size="9.5">hapus branch fitur</text>
+        <line x1="480" y1="312" x2="540" y2="312" stroke="#f0a04b" stroke-width="2.5" marker-end="url(#a2)"/>
+        <text x="500" y="302" font-size="10" fill="#f0a04b" font-weight="bold">Tidak</text>
+        <rect x="544" y="287" width="150" height="50" rx="8" fill="#3a2a12" stroke="#f0a04b" stroke-width="2"/>
+        <text x="619" y="309" text-anchor="middle" fill="#fff" font-size="10.5" font-weight="bold">Revisi sesuai</text>
+        <text x="619" y="324" text-anchor="middle" fill="#fff" font-size="10.5" font-weight="bold">catatan reviewer</text>
+        <path d="M 619,287 L 619,115 L 474,115" fill="none" stroke="#f0a04b" stroke-width="2.2" stroke-dasharray="6 4" marker-end="url(#a2)"/>
+        <text x="640" y="205" font-size="9.5" fill="#f0a04b" font-style="italic">perbaiki lalu</text>
+        <text x="640" y="218" font-size="9.5" fill="#f0a04b" font-style="italic">perbarui PR</text>
+      </g>
+    </svg>
+    <div class="cap">Gambar 3.1 — Alur code review: tidak ada kode masuk produksi tanpa pemeriksaan</div>
+  </figure>
+  <div class="pf">26</div>
+</section>
+
+<!-- ============ HAL 27 : SOP-06 + BUG DIAGRAM ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 3 — SOP Alur Kerja Pengembangan</span><span>SOP-06 Penanganan Bug</span></div>
+  <div class="sophead"><small>STANDAR OPERASIONAL PROSEDUR · BAB 3</small>SOP-06 : Penanganan Bug</div>
+  <ol class="steps">
+    <li><b>Laporkan.</b> Bug apa pun masuk ke tracker: judul jelas, langkah meniru, hasil vs harapan, tangkapan layar/log.</li>
+    <li><b>Triase &amp; prioritaskan</b> (lead/QA): <b>Kritis</b> = sistem down/data salah → tangani hari itu; <b>Tinggi</b> = fitur utama terganggu → ≤ 2 hari; <b>Sedang</b> = gangguan dengan jalan pintas; <b>Rendah</b> = kosmetik → masuk antrean rutin.</li>
+    <li><b>Tirukan bug di lokal</b> sebelum menyentuh kode. Bug yang tidak bisa ditiru tidak bisa dipastikan sembuh.</li>
+    <li><b>Temukan akar penyebab</b> (root cause), jangan hanya menambal gejala. Sertakan analisis singkat di tiket.</li>
+    <li><b>Perbaiki + tambahkan unit test</b> yang membuktikan bug tersebut tertutup (agar tidak kambuh).</li>
+    <li><b>Kirim melalui alur biasa</b>: branch <code>fix/...</code> → PR → review (SOP-05) → uji ulang pelapor/QA → <b>ditutup</b>.</li>
+  </ol>
+  <figure>
+    <svg viewBox="0 0 700 350" style="width:96%">
+      <defs><marker id="a3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#2f9bff"/></marker></defs>
+      <g font-family="Segoe UI,Arial">
+        <line x1="222" y1="71" x2="241" y2="71" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#a3)"/>
+        <line x1="457" y1="71" x2="476" y2="71" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#a3)"/>
+        <line x1="585" y1="104" x2="585" y2="246" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#a3)"/>
+        <line x1="478" y1="281" x2="459" y2="281" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#a3)"/>
+        <line x1="243" y1="281" x2="224" y2="281" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#a3)"/>
+        <path d="M 115,314 L 115,332 L 585,332 L 585,318" fill="none" stroke="#f0a04b" stroke-width="2.2" stroke-dasharray="6 4" marker-end="url(#a3)"/>
+        <text x="350" y="326" text-anchor="middle" font-size="9.5" fill="#f0a04b" font-style="italic">uji ulang gagal → dibuka kembali</text>
+        <g><rect x="10" y="40" width="212" height="62" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/>
+        <text x="116" y="67" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="bold">1. BUG DITEMUKAN</text>
+        <text x="116" y="86" text-anchor="middle" fill="#9fc3e8" font-size="9">oleh QA, pengguna, atau monitoring</text></g>
+        <g><rect x="245" y="40" width="212" height="62" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/>
+        <text x="351" y="67" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="bold">2. DILAPORKAN</text>
+        <text x="351" y="86" text-anchor="middle" fill="#9fc3e8" font-size="9">tiket lengkap di issue tracker</text></g>
+        <g><rect x="480" y="40" width="210" height="62" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/>
+        <text x="585" y="67" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="bold">3. TRIASE</text>
+        <text x="585" y="86" text-anchor="middle" fill="#9fc3e8" font-size="9">prioritas &amp; penanggung jawab</text></g>
+        <g><rect x="480" y="250" width="210" height="62" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/>
+        <text x="585" y="277" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="bold">4. DIKERJAKAN</text>
+        <text x="585" y="296" text-anchor="middle" fill="#9fc3e8" font-size="9">analisis akar masalah → perbaikan</text></g>
+        <g><rect x="245" y="250" width="212" height="62" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/>
+        <text x="351" y="277" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="bold">5. DIUJI ULANG</text>
+        <text x="351" y="296" text-anchor="middle" fill="#9fc3e8" font-size="9">QA/pelapor memverifikasi perbaikan</text></g>
+        <g><rect x="10" y="250" width="212" height="62" rx="8" fill="#147a4d" stroke="#7ee787" stroke-width="2"/>
+        <text x="116" y="277" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="bold">6. DITUTUP ✓</text>
+        <text x="116" y="296" text-anchor="middle" fill="#c9f2d9" font-size="9">terverifikasi &amp; tercatat di changelog</text></g>
+      </g>
+    </svg>
+    <div class="cap">Gambar 3.2 — Siklus hidup bug: dari ditemukan hingga tertutup terverifikasi</div>
+  </figure>
+  <div class="pf">27</div>
+</section>
+
+<!-- ============ HAL 28 : SOP-07 + RANGKUMAN ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 3 — SOP Alur Kerja Pengembangan</span><span>SOP-07 Dokumentasi &amp; Rangkuman</span></div>
+  <div class="sophead"><small>STANDAR OPERASIONAL PROSEDUR · BAB 3</small>SOP-07 : Dokumentasi</div>
+  <ol class="steps">
+    <li><b>Perbarui README</b> bila cara install/jalankan/deploy berubah.</li>
+    <li><b>Tulis entri CHANGELOG</b> untuk setiap rilis: ditambah, diubah, diperbaiki, dihapus.</li>
+    <li><b>Dokumentasikan API</b> (endpoint, parameter, contoh respons) setiap ada perubahan kontrak API.</li>
+    <li><b>Catat keputusan teknis penting</b> (ADR singkat): masalah → pilihan → keputusan → alasan.</li>
+    <li><b>Dokumentasi dilakukan bersamaan</b> dengan pekerjaan, bukan "nanti kalau sempat".</li>
+  </ol>
+  <h2 class="sec">Rangkuman Bab 3</h2>
+  <table>
+    <tr><th style="width:20mm">SOP</th><th>Inti yang Harus Diingat</th></tr>
+    <tr><td><b>01</b></td><td>Tidak ada pekerjaan di luar tiket; satu orang satu tugas aktif</td></tr>
+    <tr><td><b>02</b></td><td>Kriteria selesai yang bisa diuji, disepakati sebelum koding</td></tr>
+    <tr><td><b>03</b></td><td>Rancang dulu, pecah tugas ≤ 1 hari, estimasi jujur</td></tr>
+    <tr><td><b>04</b></td><td>Branch khusus, commit kecil, uji sendiri, bersih sebelum push</td></tr>
+    <tr><td><b>05</b></td><td>Semua kode melalui review; komentar pada kode, bukan orang</td></tr>
+    <tr><td><b>06</b></td><td>Tirukan bug → akar penyebab → perbaiki + test regression</td></tr>
+    <tr><td><b>07</b></td><td>Dokumentasi menyertai pekerjaan, bukan menyusul</td></tr>
+  </table>
+  <div class="box tip"><b class="t">Tips Membudayakan SOP</b>
+  Mulai dari yang paling menyakitkan di tim Anda (biasanya review & commit). Jalankan 2 minggu, evaluasi, perbaiki SOP-nya bersama — kepemilikan tim membuat SOP diikuti sukarela.</div>
+  <div class="pf">28</div>
+</section>
+
+<!-- ============ HAL 29 : PEMBUKA BAB 4 ============ -->
+<section class="page">
+  <div class="opener">
+    <div class="lbl">Bab Empat</div>
+    <div class="num">04</div>
+    <h1>Version Control &amp; Kolaborasi Tim</h1>
+    <div class="sub">Git adalah mesin waktu dan meja kerja bersama seorang programmer. Bab ini menstandardisasi cara tim bekerja pada satu repositori tanpa saling menginjak.</div>
+    <ul>
+      <li><b>4.1</b> Konsep Dasar Git</li>
+      <li><b>4.2</b> Strategi Branching (Alur Cabang)</li>
+      <li><b>4.3</b> Aturan Commit Message</li>
+      <li><b>4.4</b> SOP Pull Request &amp; Review</li>
+      <li><b>4.5</b> Menangani Konflik &amp; Komunikasi Tim</li>
+    </ul>
+    <div class="foot">LEITFADEN &amp; SOP PROGRAMMER — BAGIAN 4 DARI 5</div>
+  </div>
+</section>
+
+<!-- ============ HAL 30 : 4.1 ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 4 — Version Control &amp; Kolaborasi</span><span>4.1 Konsep Dasar Git</span></div>
+  <h2 class="sec">4.1 Konsep Dasar Git</h2>
+  <p><b class="ac">Git</b> mencatat seluruh riwayat perubahan kode sehingga tim bisa bekerja paralel, menelusuri siapa mengubah apa, dan kembali ke kondisi mana pun bila terjadi masalah.</p>
+  <h3 class="sec">Istilah Wajib</h3>
+  <table>
+    <tr><th style="width:30mm">Istilah</th><th>Arti</th></tr>
+    <tr><td><b>Repository</b></td><td>Projek + seluruh riwayat perubahannya</td></tr>
+    <tr><td><b>Commit</b></td><td>Satu "snapshot" perubahan dengan pesan penjelas</td></tr>
+    <tr><td><b>Branch</b></td><td>Jalur kerja terpisah agar tidak mengganggu jalur utama</td></tr>
+    <tr><td><b>Merge</b></td><td>Menggabungkan hasil branch ke jalur lain</td></tr>
+    <tr><td><b>Pull Request (PR)</b></td><td>Usulan penggabungan + forum review sebelum merge</td></tr>
+  </table>
+  <h3 class="sec">Perintah Harian yang Wajib Lancar</h3>
+<pre>git status                  <span class="c"># lihat kondisi repo saat ini</span>
+git pull origin develop     <span class="c"># ambil kode terbaru sebelum mulai</span>
+git checkout -b feature/x   <span class="c"># buat + pindah ke branch baru</span>
+git add . &amp;&amp; git commit -m <span class="s">"feat: pesan bermakna"</span>
+git push origin feature/x   <span class="c"># kirim branch ke server</span>
+git log --oneline           <span class="c"># telusuri riwayat commit</span></pre>
+  <div class="box warn"><b class="t">Peringatan</b>
+  <code>git push --force</code> ke branch bersama (<code>main</code>/<code>develop</code>) dapat <b>menghapus pekerjaan rekan secara permanen</b>. Dilarang keras tanpa koordinasi eksplisit.</div>
+  <div class="box tip"><b class="t">Tips</b>
+  Selesai satu perubahan kecil yang utuh = satu commit. Commit kecil mudah direview, mudah dibatalkan, dan mudah ditelusuri.</div>
+  <div class="pf">30</div>
+</section>
+
+<!-- ============ HAL 31 : 4.2 BRANCHING ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 4 — Version Control &amp; Kolaborasi</span><span>4.2 Strategi Branching</span></div>
+  <h2 class="sec">4.2 Strategi Branching (Alur Cabang)</h2>
+  <p>Tim ini menggunakan alur sederhana ala <b class="ac">Git Flow ringkas</b>: <code>main</code> berisi kode produksi yang stabil; <code>develop</code> adalah meja integrasi; setiap pekerjaan berada di <code>feature/</code> atau <code>fix/</code> sendiri.</p>
+  <figure>
+    <svg viewBox="0 0 700 320" style="width:100%">
+      <defs><marker id="ar2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#7d93b2"/></marker></defs>
+      <g font-family="Segoe UI,Arial">
+        <text x="32" y="52" font-size="13" font-weight="bold" fill="#0d2240">main</text>
+        <text x="80" y="52" font-size="9.5" fill="#5b7089">(kode produksi — stabil, selalu bisa dirilis)</text>
+        <line x1="30" y1="70" x2="670" y2="70" stroke="#0d2240" stroke-width="3.5"/>
+        <text x="32" y="152" font-size="13" font-weight="bold" fill="#1e88e5">develop</text>
+        <text x="100" y="152" font-size="9.5" fill="#5b7089">(integrasi hasil pekerjaan tim)</text>
+        <line x1="30" y1="170" x2="670" y2="170" stroke="#2f9bff" stroke-width="3.5"/>
+        <path d="M 130,170 Q 130,235 165,235 L 395,235 Q 430,235 430,172" fill="none" stroke="#f0a04b" stroke-width="2.5"/>
+        <text x="205" y="258" font-size="10.5" fill="#c77f2e" font-weight="bold">feature/login-google</text>
+        <path d="M 470,170 Q 470,235 500,235 L 585,235 Q 615,235 615,172" fill="none" stroke="#f0a04b" stroke-width="2.5"/>
+        <text x="470" y="258" font-size="10.5" fill="#c77f2e" font-weight="bold">fix/hitung-pajak</text>
+        <line x1="648" y1="170" x2="648" y2="78" stroke="#7d93b2" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ar2)"/>
+        <text x="520" y="118" font-size="9.5" fill="#7d93b2" font-style="italic">rilis: merge develop → main + tag versi</text>
+        <g fill="#0d2240"><circle cx="60" cy="70" r="5"/><circle cx="240" cy="70" r="5"/><circle cx="400" cy="70" r="5"/><circle cx="560" cy="70" r="5"/><circle cx="648" cy="70" r="5"/></g>
+        <g fill="#2f9bff"><circle cx="60" cy="170" r="5"/><circle cx="130" cy="170" r="5"/><circle cx="280" cy="170" r="5"/><circle cx="430" cy="170" r="5"/><circle cx="470" cy="170" r="5"/><circle cx="615" cy="170" r="5"/><circle cx="660" cy="170" r="5"/></g>
+        <g fill="#f0a04b"><circle cx="280" cy="235" r="5"/><circle cx="545" cy="235" r="5"/></g>
+      </g>
+    </svg>
+    <div class="cap">Gambar 4.1 — Alur branching: fitur lahir dari develop dan kembali ke develop melalui review</div>
+  </figure>
+  <h3 class="sec">Aturan Ringkas</h3>
+  <table>
+    <tr><th style="width:44mm">Branch</th><th style="width:52mm">Nama</th><th>Ketentuan</th></tr>
+    <tr><td><code>main</code></td><td>tetap</td><td>Hanya menerima merge rilis; dilindungi (protected)</td></tr>
+    <tr><td><code>develop</code></td><td>tetap</td><td>Base untuk semua fitur; wajib lewat PR</td></tr>
+    <tr><td>Fitur</td><td><code>feature/…</code></td><td>Satu fitur satu branch; hidup ≤ ±3 hari, merge lalu hapus</td></tr>
+    <tr><td>Perbaikan</td><td><code>fix/…</code></td><td>Untuk bug; bug kritis mendahului fitur apa pun</td></tr>
+    <tr><td>Panas</td><td><code>hotfix/…</code></td><td>Dari <code>main</code> untuk insiden produksi; merge balik ke main &amp; develop</td></tr>
+  </table>
+  <div class="box warn"><b class="t">Larangan</b> Mengerjakan banyak fitur tak berhubungan dalam satu branch, dan branch yang menggantung berminggu-minggu (rawat konfliknya lebih mahal dari kodenya).</div>
+  <div class="pf">31</div>
+</section>
+
+<!-- ============ HAL 32 : 4.3 COMMIT ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 4 — Version Control &amp; Kolaborasi</span><span>4.3 Aturan Commit Message</span></div>
+  <h2 class="sec">4.3 Aturan Commit Message</h2>
+  <p>Pesan commit adalah <b class="ac">jurnal resmi proyek</b>. Standar yang dipakai: <b>Conventional Commits</b> — mudah dibaca manusia, sekaligus otomatis bisa menyusun changelog.</p>
+  <h3 class="sec">Format Baku</h3>
+<pre><span class="k">&lt;tipe&gt;</span>(<span class="n">cakupan-opsional</span>): <span class="s">ringkasan singkat dalam kalimat perintah</span>
+
+<span class="c">[badan opsional: mengapa perubahan ini perlu]</span></pre>
+  <table>
+    <tr><th style="width:22mm">Tipe</th><th style="width:62mm">Dipakai Untuk</th><th>Contoh</th></tr>
+    <tr><td><b>feat</b></td><td>Fitur / kemampuan baru</td><td><code>feat(keranjang): tambah kupon diskon</code></td></tr>
+    <tr><td><b>fix</b></td><td>Perbaikan bug</td><td><code>fix(pajak): koreksi pembulatan total</code></td></tr>
+    <tr><td><b>docs</b></td><td>Dokumentasi saja</td><td><code>docs: perbarui cara setup .env</code></td></tr>
+    <tr><td><b>style</b></td><td>Format, tanpa ubah logika</td><td><code>style: rapikan indentasi services/</code></td></tr>
+    <tr><td><b>refactor</b></td><td>Rapikan kode, hasil sama</td><td><code>refactor(auth): pecah fungsi login</code></td></tr>
+    <tr><td><b>test</b></td><td>Menambah/memperbaiki test</td><td><code>test(ongkir): kasus berat nol</code></td></tr>
+    <tr><td><b>chore</b></td><td>Pemeliharaan (dependensi, CI)</td><td><code>chore: naikkan versi eslint</code></td></tr>
+  </table>
+  <h3 class="sec">Contoh Perbandingan</h3>
+<pre><span class="c">/* ✘ Buruk — tidak bisa ditelusuri */</span>
+git commit -m <span class="s">"update"</span>
+git commit -m <span class="s">"fix bug"</span>
+git commit -m <span class="s">"asdasd"</span>
+
+<span class="c">/* ✔ Baik — jelas apa dan mengapa */</span>
+git commit -m <span class="s">"feat(order): tombol batalkan pesanan &lt; 1 jam"</span>
+git commit -m <span class="s">"fix(login): redirect berulang saat sesi habis"</span></pre>
+  <div class="box"><b class="t">Kaidah Tambahan</b>
+  Baris pertama ≤ 50–72 karakter, huruf kecil di awal, tanpa titik akhir. Satu commit = satu maksud logis. Jangan commit file rahasia (<code>.env</code>) — sekali masuk riwayat, sulit dihapus.</div>
+  <div class="pf">32</div>
+</section>
+
+<!-- ============ HAL 33 : 4.4 PR ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 4 — Version Control &amp; Kolaborasi</span><span>4.4 SOP Pull Request</span></div>
+  <div class="sophead"><small>STANDAR OPERASIONAL PROSEDUR · BAB 4</small>SOP-08 : Pull Request &amp; Review</div>
+  <ol class="steps">
+    <li><b>Buka PR dari branch fitur ke <code>develop</code></b>, judul mengikuti format commit, deskripsi memuat: tujuan, ringkasan perubahan, dan <b>cara menguji</b>.</li>
+    <li><b>Tautkan tiket terkait</b> (mis. <code>Closes #42</code>) agar status tugas ikut termutakhirkan.</li>
+    <li><b>Pastikan semua centang hijau:</b> build lulus, linter lulus, unit test lulus. PR merah tidak boleh direview.</li>
+    <li><b>Tugaskan 1–2 reviewer</b> yang memahami area kode tersebut; rotasi agar pengetahuan menyebar.</li>
+    <li><b>Reviewer meninjau ≤ 1×24 jam kerja</b> dengan checklist di bawah; hasil: <i>approve</i>, <i>minta perubahan</i>, atau <i>bertanya</i>.</li>
+    <li><b>Selesaikan seluruh percakapan</b> (setiap komentar dijawab/diperbaiki) sebelum merge; gunakan <i>squash merge</i> agar riwayat develop tetap bersih.</li>
+    <li><b>Hapus branch fitur</b> setelah merge. Branch selesai dibiarkan hidup hanya menambah kebisingan.</li>
+  </ol>
+  <h3 class="sec">Checklist Reviewer</h3>
+  <ul class="chk">
+    <li>Apakah kode berjalan sesuai tiket dan kriteria selesai?</li>
+    <li>Apakah penamaan, format, dan struktur sesuai standar Bab 2?</li>
+    <li>Adakah celah keamanan (input tak tervalidasi, data sensitif terekspos)?</li>
+    <li>Adakah kode duplikat yang seharusnya dipakai ulang?</li>
+    <li>Apakah ada unit test untuk perilaku baru/perbaikan?</li>
+    <li>Apakah perubahan ini memengaruhi modul lain (perlu info ke tim terkait)?</li>
+  </ul>
+  <div class="box tip"><b class="t">Budaya Review yang Sehat</b>
+  Kritik kodenya, hormati orangnya. Mulai dari apresiasi ("bagus pembagian fungsinya"), lalu saran konkret ("bisa dipersingkat dengan X?"). PR bukan arena adu kuota — melainkan kelas belajar bersama.</div>
+  <div class="pf">33</div>
+</section>
+
+<!-- ============ HAL 34 : 4.5 + 4.6 ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 4 — Version Control &amp; Kolaborasi</span><span>4.5 Konflik &amp; Kolaborasi Tim</span></div>
+  <h2 class="sec">4.5 Menangani Konflik Merge</h2>
+  <p>Konflik terjadi bila dua orang mengubah baris yang sama — itu <b class="ac">normal</b> di tim yang sehat. Yang salah adalah cara menyelesaikannya secara sembarangan.</p>
+  <ol class="steps">
+    <li><b>Jangan panik.</b> Baca penanda konflik <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> dan pahami niat kedua sisi.</li>
+    <li><b>Pull terbaru &amp; komunikasikan</b> kepada pemilik perubahan bersebelahan bila ragu mana yang benar.</li>
+    <li><b>Selesaikan di lokal</b>, pilih gabungan yang benar secara logika (bukan sekadar "punya saya").</li>
+    <li><b>Jalankan test ulang</b> sebelum menandai konflik selesai.</li>
+    <li><b>Commit hasil resolusi</b> dan lanjutkan alur review seperti biasa.</li>
+  </ol>
+  <div class="box warn"><b class="t">Tiga Larangan Berat di Git</b>
+  ① <code>push --force</code> ke branch bersama &nbsp;② menonaktifkan proteksi <code>main</code> demi "biar cepat" &nbsp;③ menyelesaikan konflik dengan menghapus pekerjaan rekan tanpa konfirmasi.</div>
+  <h2 class="sec">4.6 Komunikasi &amp; Kolaborasi Harian</h2>
+  <table>
+    <tr><th style="width:46mm">Praktik</th><th>Ketentuan</th></tr>
+    <tr><td><b>Daily stand-up</b></td><td>Maks. 15 menit: kemarin, hari ini, hambatan — bukan sesi rapat panjang</td></tr>
+    <tr><td><b>Papan kerja</b></td><td>Status tiket = kebenaran tunggal; perbarui sebelum lupa</td></tr>
+    <tr><td><b>Pertanyaan teknis</b></td><td>Sertakan konteks: kode, pesan error, apa yang sudah dicoba</td></tr>
+    <tr><td><b>Blokir &gt; 30 menit</b></td><td>Wajib laporkan — jangan tenggelam diam-diam</td></tr>
+    <tr><td><b>Pembaruan pengetahuan</b></td><td>Bagi temuan baru di kanal tim / sesi singkat mingguan</td></tr>
+  </table>
+  <h2 class="sec">Rangkuman Bab 4</h2>
+  <ul class="b">
+    <li>Satu pekerjaan = satu branch berawalan tipe; semua masuk via PR + review.</li>
+    <li>Commit mengikuti <b>Conventional Commits</b>: kecil, jujur, bermakna.</li>
+    <li><code>main</code> dan <code>develop</code> dilindungi; tidak ada jalan pintas.</li>
+    <li>Konflik diselesaikan dengan kepala dingin, logika, dan komunikasi.</li>
+  </ul>
+  <div class="pf">34</div>
+</section>
+
+<!-- ============ HAL 35 : PEMBUKA BAB 5 ============ -->
+<section class="page">
+  <div class="opener">
+    <div class="lbl">Bab Lima</div>
+    <div class="num">05</div>
+    <h1>Testing, Deployment &amp; Pemeliharaan</h1>
+    <div class="sub">Kode yang belum diuji belum selesai; kode yang tidak terpantau di produksi adalah petir yang belum jatuh. Bab ini menutup siklus kerja programmer.</div>
+    <ul>
+      <li><b>5.1</b> Jenis-Jenis Pengujian &amp; Piramida Testing</li>
+      <li><b>5.2</b> SOP Unit Testing</li>
+      <li><b>5.3</b> SOP Debugging</li>
+      <li><b>5.4</b> SOP Deployment</li>
+      <li><b>5.5</b> Monitoring, Backup &amp; Pemulihan</li>
+    </ul>
+    <div class="foot">LEITFADEN &amp; SOP PROGRAMMER — BAGIAN 5 DARI 5</div>
+  </div>
+</section>
+
+<!-- ============ HAL 36 : 5.1 PIRAMIDA ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 5 — Testing, Deployment &amp; Pemeliharaan</span><span>5.1 Jenis Pengujian</span></div>
+  <h2 class="sec">5.1 Jenis-Jenis Pengujian &amp; Piramida Testing</h2>
+  <figure>
+    <svg viewBox="0 0 700 350" style="width:97%">
+      <defs><marker id="ar3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#7d93b2"/></marker></defs>
+      <g font-family="Segoe UI,Arial">
+        <line x1="55" y1="320" x2="55" y2="60" stroke="#7d93b2" stroke-width="2" marker-end="url(#ar3)"/>
+        <text x="40" y="200" font-size="10" fill="#5b7089" font-style="italic" transform="rotate(-90 40,200)">semakin ke atas: lebih lambat &amp; mahal</text>
+        <line x1="645" y1="60" x2="645" y2="320" stroke="#7d93b2" stroke-width="2" marker-end="url(#ar3)"/>
+        <text x="663" y="200" font-size="10" fill="#5b7089" font-style="italic" transform="rotate(90 663,200)">semakin ke bawah: lebih cepat &amp; murah</text>
+        <polygon points="220,146 480,146 350,50" fill="#2f9bff"/>
+        <text x="350" y="112" text-anchor="middle" fill="#fff" font-size="12.5" font-weight="bold">UI / E2E</text>
+        <text x="350" y="130" text-anchor="middle" fill="#e3f1fd" font-size="9.5">±10% — alur penting pengguna</text>
+        <polygon points="160,152 540,152 480,236 220,236" fill="#1c4e89"/>
+        <text x="350" y="188" text-anchor="middle" fill="#fff" font-size="12.5" font-weight="bold">PENGUJIAN INTEGRASI</text>
+        <text x="350" y="207" text-anchor="middle" fill="#cfe2f5" font-size="9.5">±20% — modul bekerja sama, API, database</text>
+        <polygon points="100,242 600,242 540,330 160,330" fill="#10233f"/>
+        <text x="350" y="278" text-anchor="middle" fill="#fff" font-size="12.5" font-weight="bold">PENGUJIAN UNIT</text>
+        <text x="350" y="297" text-anchor="middle" fill="#9fc3e8" font-size="9.5">±70% — fungsi kecil, cepat, berjalan tiap commit</text>
+      </g>
+    </svg>
+    <div class="cap">Gambar 5.1 — Piramida testing: banyak unit test murah, sedikit E2E mahal</div>
+  </figure>
+  <table>
+    <tr><th style="width:36mm">Jenis</th><th>Menguji Apa</th><th style="width:34mm">Contoh Alat</th></tr>
+    <tr><td><b>Unit</b></td><td>Satu fungsi/kelas terisolasi</td><td>Jest, PHPUnit, pytest</td></tr>
+    <tr><td><b>Integrasi</b></td><td>Rangkaian modul + database/API</td><td>Supertest, Postman</td></tr>
+    <tr><td><b>UI / E2E</b></td><td>Alur pengguna dari depan ke belakang</td><td>Cypress, Selenium</td></tr>
+  </table>
+  <div class="box"><b class="t">Kenapa Piramida?</b>
+  Test di dasar berjalan dalam milidetik dan menunjuk kesalahan dengan presisi. Test di puncak lambat dan sering rapuh. Membalik piramida (banyak E2E, sedikit unit) membuat tim lambat dan mudah frustrasi.</div>
+  <div class="pf">36</div>
+</section>
+
+<!-- ============ HAL 37 : 5.2 UNIT TEST ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 5 — Testing, Deployment &amp; Pemeliharaan</span><span>5.2 SOP Unit Testing</span></div>
+  <div class="sophead"><small>STANDAR OPERASIONAL PROSEDUR · BAB 5</small>SOP-09 : Unit Testing</div>
+  <ol class="steps">
+    <li><b>Setiap fungsi logika bisnis wajib punya unit test</b> — perhitungan, validasi, aturan keputusan.</li>
+    <li><b>Beri nama test yang menggambarkan perilaku:</b> "menolak kupon kedaluwarsa", bukan "test2".</li>
+    <li><b>Gunakan pola AAA:</b> <i>Arrange</i> (siapkan data) → <i>Act</i> (jalankan) → <i>Assert</i> (periksa hasil).</li>
+    <li><b>Uji tiga kelompok kasus:</b> normal, batas (edge), dan gagal (input salah/eksepsi).</li>
+    <li><b>Test harus mandiri</b> — tidak bergantung urutan, tidak menyentuh server nyata (pakai <i>mock</i>).</li>
+    <li><b>Semua test dijalankan otomatis</b> di pipeline CI; PR dengan test gagal tidak dapat di-merge.</li>
+    <li><b>Perbaikan bug wajib menyertakan test regression</b> yang tadinya gagal — agar bug tidak kambuh.</li>
+  </ol>
+  <h3 class="sec">Contoh Unit Test (Jest)</h3>
+<pre><span class="k">function</span> <span class="f">hitungDiskon</span>(total) {
+  <span class="k">return</span> total &gt;= <span class="n">100_000</span> ? total * <span class="n">0.9</span> : total;
+}
+
+<span class="f">test</span>(<span class="s">'total ≥ 100rb mendapat diskon 10%'</span>, () =&gt; {
+  <span class="f">expect</span>(<span class="f">hitungDiskon</span>(<span class="n">200_000</span>)).<span class="f">toBe</span>(<span class="n">180_000</span>);
+});
+
+<span class="f">test</span>(<span class="s">'total di bawah 100rb tanpa diskon'</span>, () =&gt; {
+  <span class="f">expect</span>(<span class="f">hitungDiskon</span>(<span class="n">99_999</span>)).<span class="f">toBe</span>(<span class="n">99_999</span>);
+});</pre>
+  <div class="box tip"><b class="t">Tips</b>
+  Perlakukan test sebagai kode produksi: beri nama baik, rapikan, hapus yang usang. Test yang buruk memberi rasa aman palsu.</div>
+  <div class="pf">37</div>
+</section>
+
+<!-- ============ HAL 38 : 5.3 DEBUGGING ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 5 — Testing, Deployment &amp; Pemeliharaan</span><span>5.3 SOP Debugging</span></div>
+  <div class="sophead"><small>STANDAR OPERASIONAL PROSEDUR · BAB 5</small>SOP-10 : Debugging</div>
+  <p><b>Tujuan:</b> menemukan akar penyebab secara sistematis — bukan menebak-nebak sambil mengubah-ubah kode.</p>
+  <ol class="steps">
+    <li><b>Baca pesan kesalahan sampai habis.</b> 80% jawaban ada di situ: jenis error, file, baris.</li>
+    <li><b>Tirukan masalah secara andal.</b> Temukan langkah minimal yang selalu menghasilkan error.</li>
+    <li><b>Persempit wilayah:</b> periksa input → proses → keluaran tahap demi tahap. Gunakan <i>breakpoint</i>/logging bertahap, bukan tebak-tebakan besar-besaran.</li>
+    <li><b>Uji satu hipotesis per satu perubahan.</b> Jika mengubah lima hal sekaligus, Anda tak tahu mana yang menyembuhkan.</li>
+    <li><b>Cek perubahan terakhir</b> (<code>git log</code>/<code>git diff</code>) — penyebab paling sering adalah perubahan paling baru.</li>
+    <li><b>Isolasi variabel:</b> data? konfigurasi? lingkungan (beda antara lokal vs staging)? versi dependensi?</li>
+    <li><b>Setelah sembuh, tulis unit test regression</b> dan catat akar masalah di tiket (SOP-06 langkah 4–5).</li>
+  </ol>
+  <h3 class="sec">Kotak Alat Debugging</h3>
+  <table>
+    <tr><th style="width:44mm">Alat</th><th>Kapan Dipakai</th></tr>
+    <tr><td>Debugger &amp; breakpoint</td><td>Menelusuri nilai variabel langkah demi langkah</td></tr>
+    <tr><td>Log terstruktur</td><td>Melacak alur di server; sertakan ID request</td></tr>
+    <tr><td>Network/DB inspector</td><td>Mengamati request API, payload, dan query database</td></tr>
+    <tr><td>Bisection <code>git bisect</code></td><td>Mencari commit yang pertama kali memperkenalkan bug</td></tr>
+  </table>
+  <div class="box warn"><b class="t">Jebakan Umum</b>
+  "Kemarin jalan kok" bukan analisis. Juga: memperbaiki dengan mencoba-coba acak tanpa memahami penyebab — bug hampir selalu kembali.</div>
+  <div class="pf">38</div>
+</section>
+
+<!-- ============ HAL 39 : 5.4 DEPLOYMENT ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 5 — Testing, Deployment &amp; Pemeliharaan</span><span>5.4 SOP Deployment</span></div>
+  <div class="sophead"><small>STANDAR OPERASIONAL PROSEDUR · BAB 5</small>SOP-11 : Deployment</div>
+  <ol class="steps">
+    <li><b>Pastikan PR sudah merge</b> ke develop dan seluruh pemeriksaan otomatis hijau.</li>
+    <li><b>Rilis dari develop ke staging;</b> tim QA/uji penerimaan memverifikasi alur utama.</li>
+    <li><b>Minta persetujuan rilis</b> (lead/PM) — rilis produksi tidak pernah diam-diam.</li>
+    <li><b>Tag versi</b> (mis. <code>v1.4.0</code>) dan susun entri changelog.</li>
+    <li><b>Deploy ke produksi</b> melalui pipeline otomatis; jangan salin file manual ke server.</li>
+    <li><b>Pantau 30 menit pertama:</b> error rate, log, fitur utama dicoba langsung.</li>
+    <li><b>Jika gagal: rollback</b> segera ke versi stabil terakhir, analisis tenang, rilis ulang setelah yakin.</li>
+  </ol>
+  <figure>
+    <svg viewBox="0 0 700 210" style="width:100%">
+      <defs><marker id="a4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#2f9bff"/></marker></defs>
+      <g font-family="Segoe UI,Arial">
+        <rect x="10"   y="55" width="100" height="56" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/><text x="60"   y="88" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="bold">Commit</text>
+        <rect x="124"  y="55" width="100" height="56" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/><text x="174"  y="88" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="bold">Build (CI)</text>
+        <rect x="238"  y="55" width="100" height="56" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/><text x="288"  y="82" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="bold">Test</text><text x="288" y="98" text-anchor="middle" fill="#9fc3e8" font-size="9">otomatis</text>
+        <rect x="352"  y="55" width="100" height="56" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/><text x="402"  y="88" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="bold">Staging</text>
+        <rect x="466"  y="55" width="100" height="56" rx="8" fill="#147a4d" stroke="#7ee787" stroke-width="2"/><text x="516"  y="88" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="bold">Produksi</text>
+        <rect x="580"  y="55" width="110" height="56" rx="8" fill="#10233f" stroke="#2f9bff" stroke-width="2"/><text x="635"  y="88" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="bold">Monitoring</text>
+        <line x1="110" y1="83" x2="120" y2="83" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#a4)"/>
+        <line x1="224" y1="83" x2="234" y2="83" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#a4)"/>
+        <line x1="338" y1="83" x2="348" y2="83" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#a4)"/>
+        <line x1="452" y1="83" x2="462" y2="83" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#a4)"/>
+        <line x1="566" y1="83" x2="576" y2="83" stroke="#2f9bff" stroke-width="2.5" marker-end="url(#a4)"/>
+        <polygon points="457,71 469,83 457,95 445,83" fill="#f0a04b"/>
+        <text x="457" y="128" text-anchor="middle" font-size="9" fill="#c77f2e">persetujuan</text>
+        <g font-size="9" fill="#5b7089" text-anchor="middle" font-style="italic">
+          <text x="60"  y="128">git push</text><text x="174" y="128">compile &amp; paket</text><text x="288" y="128">unit + integrasi</text>
+          <text x="402" y="128">uji penerimaan QA</text><text x="516" y="128">rilis live</text><text x="635" y="128">log, alert, uptime</text>
+        </g>
+      </g>
+    </svg>
+    <div class="cap">Gambar 5.2 — Pipeline deployment: dari commit hingga pemantauan</div>
+  </figure>
+  <h3 class="sec">Checklist Pra-Rilis</h3>
+  <ul class="chk">
+    <li>Semua test lulus di CI &amp; staging diverifikasi QA</li>
+    <li>Backup database sebelum migrasi</li>
+    <li>Changelog &amp; tag versi siap; tim siaga pasca-rilis</li>
+    <li>Rencana rollback diketahui dan teruji</li>
+  </ul>
+  <div class="pf">39</div>
+</section>
+
+<!-- ============ HAL 40 : 5.5 + RANGKUMAN ============ -->
+<section class="page">
+  <div class="ph"><span>BAB 5 — Testing, Deployment &amp; Pemeliharaan</span><span>5.5 Monitoring, Backup &amp; Pemulihan</span></div>
+  <h2 class="sec">5.5 Monitoring &amp; Pemeliharaan</h2>
+  <p>Rilis bukan garis akhir. Sistem yang hidup butuh pengawasan dan perawatan berkala.</p>
+  <table>
+    <tr><th style="width:52mm">Jenis Pemeliharaan</th><th>Contoh Kegiatan</th></tr>
+    <tr><td><b>Korektif</b></td><td>Memperbaiki bug yang lolos ke produksi (SOP-06)</td></tr>
+    <tr><td><b>Adaptif</b></td><td>Menyesuaikan sistem dengan perubahan lingkungan (versi bahasa, OS, API pihak ketiga)</td></tr>
+    <tr><td><b>Penyempurnaan</b></td><td>Refactoring terjadwal, optimasi query &amp; performa</td></tr>
+    <tr><td><b>Preventif</b></td><td>Update dependensi keamanan, rotasi log, audit akses</td></tr>
+  </table>
+  <div class="box"><b class="t">Yang Dipantau Minimum</b>
+  Uptime, tingkat kesalahan (5xx), waktu respons, penggunaan memori/CPU, dan log kesalahan dengan <i>alert</i> otomatis ke kanal tim.</div>
+  <h2 class="sec">5.6 Backup &amp; Pemulihan</h2>
+  <ul class="b">
+    <li><b class="ac">Aturan 3-2-1:</b> 3 salinan data, 2 media berbeda, 1 salinan di luar lokasi (cloud).</li>
+    <li>Backup database otomatis harian + sebelum setiap migrasi besar.</li>
+    <li><b class="ac">Uji pemulihan</b> secara berkala — backup yang belum pernah diujicobakan hanyalah angan-angan.</li>
+    <li>Dokumentasikan prosedur rollback: perintah, urutan, dan siapa yang memutuskan.</li>
+  </ul>
+  <h2 class="sec">Rangkuman Bab 5</h2>
+  <ul class="b">
+    <li>Ikuti piramida testing: unit tebal, E2E tipis namun fokus pada alur kritis.</li>
+    <li>Debugging = metode ilmiah: tirukan, persempit, satu hipotesis per perubahan.</li>
+    <li>Deployment hanya melalui pipeline + persetujuan + rencana rollback.</li>
+    <li>Sistem sehat dipantau, dibackup (3-2-1), dan dirawat berkala.</li>
+  </ul>
+  <div class="box tip"><b class="t">Penutup Siklus</b>
+  Dari tiket (Bab 3), kode rapi (Bab 2), kolaborasi Git (Bab 4), hingga sistem yang terpantau — inilah pekerjaan programmer profesional yang utuh.</div>
+  <div class="pf">40</div>
+</section>
+
+<!-- ============ HAL 41 : PENUTUP ============ -->
+<section class="page">
+  <div class="ph"><span>Leitfaden &amp; SOP Programmer</span><span>Penutup</span></div>
+  <h2 class="sec">Penutup</h2>
+  <p>Perangkat lunak yang hebat jarang lahir dari satu jenius yang bekerja sendirian. Ia lahir dari <b class="ac">tim yang bersepakat pada standar</b>: kode yang seragam, proses yang jelas, review yang jujur, dan tanggung jawab yang dirawat sampai sistem stabil di tangan pengguna.</p>
+  <p>Buku ini bukan aturan mati — ia adalah titik awal terbaik. Jalankan SOP-nya, rasakan manfaatnya, lalu perbaiki bersama tim secara berkala. SOP yang baik selalu hidup: ditinjau tiap kuartal, disesuaikan dengan kenyataan, dan dimiliki oleh seluruh anggota.</p>
+  <div class="box" style="text-align:center; padding:8mm">
+    <b style="font-size:13pt; color:#0d2240;">"Proses Jelas. Tim Lebih Kuat.<br>Perangkat Lunak Berkualitas."</b>
+    <p style="text-align:center; margin-top:3mm; color:#3d5a7a">— semoga menjadi budaya kerja di tempat Anda —</p>
+  </div>
+  <h3 class="sec">Langkah Anda Setelah Membaca Buku Ini</h3>
+  <ol class="steps">
+    <li>Bacakan Bab 2–3 pada seluruh anggota tim; sepakati sebagai standar resmi.</li>
+    <li>Pasang alat otomatis: linter, formatter, dan CI agar standar terjaga tanpa menggurui.</li>
+    <li>Cetak Lampiran B (checklist) dan mulai pakai besok pagi.</li>
+    <li>Evaluasi SOP setiap 3 bulan: apa yang berhasil, apa yang harus disesuaikan.</li>
+  </ol>
+  <p style="margin-top:6mm; color:#6b7d92; font-size:9.5pt">— Selamat bekerja, dan jaga kualitas kode Anda seperti menjaga nama baik tim. —</p>
+  <div class="pf">41</div>
+</section>
+
+<!-- ============ HAL 42 : LAMPIRAN A ============ -->
+<section class="page">
+  <div class="ph"><span>Lampiran</span><span>Lampiran A — Templat Dokumen SOP</span></div>
+  <h2 class="sec">Lampiran A — Templat Dokumen SOP (Siap Pakai)</h2>
+  <p>Gunakan templat ini untuk menambahkan SOP baru di luar tujuh SOP bawaan buku ini. Isilah lengkap, satu SOP satu dokumen.</p>
+  <table>
+    <tr><th style="width:48mm">Bagian</th><th>Isi (diisi oleh penyusun)</th></tr>
+    <tr><td><b>Kode &amp; Nama SOP</b></td><td style="height:9mm">SOP-__ : ______________________________</td></tr>
+    <tr><td><b>Tujuan</b></td><td style="height:12mm"></td></tr>
+    <tr><td><b>Ruang Lingkup</b></td><td style="height:12mm">Berlaku untuk siapa / proses apa</td></tr>
+    <tr><td><b>Pelaksana Bertanggung Jawab</b></td><td style="height:9mm"></td></tr>
+    <tr><td><b>Pemicu (kapan dijalankan)</b></td><td style="height:9mm"></td></tr>
+    <tr><td><b>Prasyarat / Alat</b></td><td style="height:9mm"></td></tr>
+    <tr><td><b>Langkah 1</b></td><td style="height:10mm"></td></tr>
+    <tr><td><b>Langkah 2</b></td><td style="height:10mm"></td></tr>
+    <tr><td><b>Langkah 3</b></td><td style="height:10mm"></td></tr>
+    <tr><td><b>Langkah 4</b></td><td style="height:10mm"></td></tr>
+    <tr><td><b>Langkah 5</b></td><td style="height:10mm"></td></tr>
+    <tr><td><b>Output / Bukti Pekerjaan</b></td><td style="height:10mm"></td></tr>
+    <tr><td><b>Indikator Keberhasilan</b></td><td style="height:10mm">Contoh: review &lt; 24 jam, 0 bug kritis/bulan</td></tr>
+    <tr><td><b>Disusun / Disetujui / Tanggal</b></td><td style="height:9mm">__________ / __________ / __________</td></tr>
+  </table>
+  <div class="box tip"><b class="t">Tips Penyusunan</b>
+  Tulis langkah dengan kalimat perintah aktif dan satu langkah = satu aksi terukur. Uji templat ini dengan anggota baru: bila ia bisa mengikuti tanpa bertanya, SOP Anda siap terbit.</div>
+  <div class="pf">42</div>
+</section>
+
+<!-- ============ HAL 43 : LAMPIRAN B ============ -->
+<section class="page">
+  <div class="ph"><span>Lampiran</span><span>Lampiran B — Checklist</span></div>
+  <h2 class="sec">Lampiran B — Checklist Rutin Programmer</h2>
+  <h3 class="sec">☑ Checklist Harian (Buka &amp; Tutup Hari)</h3>
+  <ul class="chk">
+    <li><b>Pagi:</b> <code>git pull</code> kode terbaru sebelum mulai bekerja</li>
+    <li><b>Pagi:</b> Periksa papan tugas; pilih SATU tugas aktif hari ini</li>
+    <li><b>Pagi:</b> Ikut stand-up: progres, rencana, hambatan</li>
+    <li><b>Siang:</b> Commit kecil sesuai progres; pesan commit sesuai format</li>
+    <li><b>Sore:</b> Jalankan test &amp; linter sebelum push</li>
+    <li><b>Sore:</b> Perbarui status tiket + dokumentasi yang berubah hari ini</li>
+    <li><b>Sore:</b> Catat 1–2 TODO prioritas untuk besok</li>
+  </ul>
+  <h3 class="sec">☑ Checklist Mingguan</h3>
+  <ul class="chk">
+    <li>Tinjau PR milik sendiri yang masih menggantung</li>
+    <li>Selesaikan review atas rekan (target: &lt; 24 jam sejak diminta)</li>
+    <li>Rapikan daftar TODO/FIXME di kode area Anda</li>
+    <li>Baca 1 artikel/dokumentasi teknik &amp; bagikan temuan penting</li>
+    <li>Bersihkan branch lokal yang sudah ter-merge</li>
+  </ul>
+  <h3 class="sec">☑ Checklist Sebelum Rilis ke Produksi</h3>
+  <ul class="chk">
+    <li>Semua unit &amp; integration test lulus di CI</li>
+    <li>Staging sudah diverifikasi QA (alur utama + kasus tepi)</li>
+    <li>Backup database terbaru tersedia &amp; terverifikasi</li>
+    <li>Changelog + tag versi sudah disiapkan</li>
+    <li>Persetujuan rilis dari lead/PM tercatat</li>
+    <li>Rencana rollback diketahui; tim siaga 30 menit pasca-rilis</li>
+    <li>Monitoring/alert aktif — tidak ada rilis tanpa pengawasan</li>
+  </ul>
+  <div class="box tip"><b class="t">Cara Memakai</b>
+  Cetak halaman ini atau salin ke aplikasi catatan tim. Centang manual setiap sesi — kebiasaan kecil yang dilakukan konsisten mengalahkan niat besar yang sporadis.</div>
+  <div class="pf">43</div>
+</section>
+
+<!-- ============ HAL 44 : LAMPIRAN C ============ -->
+<section class="page">
+  <div class="ph"><span>Lampiran</span><span>Lampiran C — Glosarium</span></div>
+  <h2 class="sec">Lampiran C — Glosarium Istilah</h2>
+  <table style="font-size:9pt">
+    <tr><th style="width:38mm">Istilah</th><th>Pengertian Singkat</th></tr>
+    <tr><td><b>API</b></td><td>Antarmuka yang memungkinkan dua aplikasi saling bertukar data</td></tr>
+    <tr><td><b>Branch</b></td><td>Jalur kerja terpisah dalam repositori Git</td></tr>
+    <tr><td><b>Bug</b></td><td>Cacat/kesalahan pada perangkat lunak yang menghasilkan perilaku tak diinginkan</td></tr>
+    <tr><td><b>CI/CD</b></td><td>Otomatisasi build, test, dan penyalinan (deployment) setiap perubahan kode</td></tr>
+    <tr><td><b>Code Review</b></td><td>Pemeriksaan kode oleh rekan sebelum digabungkan</td></tr>
+    <tr><td><b>Commit</b></td><td>Rekam jejak satu paket perubahan kode beserta pesannya</td></tr>
+    <tr><td><b>Debugging</b></td><td>Proses mencari dan menghilangkan penyebab kesalahan program</td></tr>
+    <tr><td><b>Deployment</b></td><td>Proses menyalin aplikasi ke lingkungan agar dapat dipakai pengguna</td></tr>
+    <tr><td><b>Framework</b></td><td>Kerangka kerja berisi struktur &amp; pustaka siap pakai untuk membangun aplikasi</td></tr>
+    <tr><td><b>Hotfix</b></td><td>Perbaikan darurat langsung untuk masalah kritis di produksi</td></tr>
+    <tr><td><b>IDE</b></td><td>Lingkungan pengembangan terpadu (VS Code, IntelliJ, dsb.)</td></tr>
+    <tr><td><b>Linting</b></td><td>Pemeriksaan otomatis kualitas &amp; gaya kode</td></tr>
+    <tr><td><b>Merge</b></td><td>Penggabungan perubahan dari satu branch ke branch lain</td></tr>
+    <tr><td><b>Pull Request</b></td><td>Usulan penggabungan branch + forum diskusi/review</td></tr>
+    <tr><td><b>Refactoring</b></td><td>Menata ulang kode agar lebih baik tanpa mengubah perilakunya</td></tr>
+    <tr><td><b>Repository</b></td><td>Penyimpanan proyek beserta seluruh riwayat versinya</td></tr>
+    <tr><td><b>Rollback</b></td><td>Mengembalikan sistem ke versi stabil sebelumnya</td></tr>
+    <tr><td><b>SOP</b></td><td>Standard Operating Procedure — prosedur baku kerja yang wajib diikuti</td></tr>
+    <tr><td><b>Staging</b></td><td>Lingkungan uji yang menyerupai produksi sebelum rilis sesungguhnya</td></tr>
+    <tr><td><b>Stand-up</b></td><td>Rapat harian singkat tim (±15 menit) untuk sinkronisasi</td></tr>
+    <tr><td><b>Unit Test</b></td><td>Pengujian otomatis atas unit terkecil kode (fungsi/kelas)</td></tr>
+    <tr><td><b>Version Control</b></td><td>Sistem pencatatan versi berkas (contoh: Git)</td></tr>
+  </table>
+  <div class="pf">44</div>
+</section>
+
+<!-- ============ HAL 45 : SAMPUL BELAKANG ============ -->
+<section class="page cover"><img src="sampul-belakang.jpg" alt="Sampul Belakang"></section>
+
+</body>
+</html>
